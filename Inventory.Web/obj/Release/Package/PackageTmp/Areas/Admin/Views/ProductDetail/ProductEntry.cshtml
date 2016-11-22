@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Inventory.Model.ProductDetail>
+
+@{
+    ViewBag.Title = "ProductEntry";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+<h2>Product Entry</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container">
+            <div class="text-success">
+                @if (ViewData["Message"] != null && ViewData["Message"].ToString() != "")
+                {
+                    @ViewData["Message"];
+                }
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="bg-success" id="message">
+            </div>
+        </div>
+        <br />
+        <div class="form-horizontal" role="form">
+            <div class="container">
+                <div class="row">
+
+                    <div class="form-group">
+                        @Html.Label("Product Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("ProductCategoryCode", (IEnumerable<SelectListItem>)ViewBag.ProudctCategory, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Product Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBox("ProductDetailDescription", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" id="Save" />
+                        <input type="submit" value="Clear" class="btn btn-danger" id="Clear" style="margin-left:20px;" />
+                    </div>
+                </div>
+                <div style="display:none">
+                    @Html.TextBox("Flag", "false")
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead style="color:blueviolet;">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductCategoryCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductDetailDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Flag)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KeyDate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductCategoryCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductDetailDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Flag)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KeyDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductDetailID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ProductDetailID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductDetailID })
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+    </div>
+</div>

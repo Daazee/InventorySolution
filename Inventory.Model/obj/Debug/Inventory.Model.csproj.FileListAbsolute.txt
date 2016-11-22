@@ -1,0 +1,5 @@
+E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Model\bin\Debug\Inventory.Model.dll
+E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Model\bin\Debug\Inventory.Model.pdb
+E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Model\obj\Debug\Inventory.Model.dll
+E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Model\obj\Debug\Inventory.Model.pdb
+E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Model\obj\Debug\Inventory.Model.csprojResolveAssemblyReference.cache
