@@ -50,6 +50,13 @@ namespace Inventory.Web.Controllers
         {
             return Ok(productCategoryBs.ListAll());
         }
+
+        [HttpGet]
+        [Route("GetProductCategoryByName")]
+        public IHttpActionResult GetProductCategoryByName(string name)
+        {
+            return Ok(productCategoryBs.GetProductCategoryByName(name));
+        }
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

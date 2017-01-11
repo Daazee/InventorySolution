@@ -45,5 +45,11 @@ namespace Inventory.BLL
         {
             NewSalesDA.Delete(id);
         }
+
+        public int GetLastTransNo(string TNo)
+        {
+            return NewSalesDA.GetLastTransNo(TNo);
+        }
+
     }
 }

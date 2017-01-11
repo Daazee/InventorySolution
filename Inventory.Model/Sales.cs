@@ -33,6 +33,7 @@ namespace Inventory.Model
         [Display(Name = "Amount Paid")]
         public double AmountPaid { get; set; }
 
+        public string HeaderDetail { get; set; }
         public string CreatedBy { get; set; }
 
         public DateTime CreatedOn { get; set; }

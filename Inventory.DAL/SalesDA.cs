@@ -48,5 +48,23 @@ namespace Inventory.DAL
             context.Sales.Remove(search);
             context.SaveChanges();
         }
+
+        public int GetLastTransNo(string TNo)
+        {
+            int LastTransNo = 0;
+            var search = from p in context.Sales
+                         where p.TransactionNo.StartsWith(TNo)
+                         orderby p.SalesID descending
+                         select p;
+            var result = search.FirstOrDefault();
+
+            if (result != null)
+            {
+                string[] SplitResult = result.TransactionNo.Split('/');
+                LastTransNo = Convert.ToInt32(SplitResult[2]);
+            }
+            return LastTransNo;
+        }
+
     }
 }

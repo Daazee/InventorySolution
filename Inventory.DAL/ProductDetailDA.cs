@@ -22,6 +22,10 @@ namespace Inventory.DAL
             return context.ProductDetails.Where(c => c.ProductDetailID == id).FirstOrDefault();
         }
 
+        public ProductDetail GetProductByName(string name)
+        {
+            return context.ProductDetails.Where(c => c.ProductName == name).FirstOrDefault();
+        }
         public IEnumerable<ProductDetail> GetByProductCategoryID(int CategoryCode)
         {
             return context.ProductDetails.Where(c => c.ProductCategoryID == CategoryCode).ToList();

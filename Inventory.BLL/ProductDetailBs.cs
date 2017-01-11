@@ -22,6 +22,11 @@ namespace Inventory.BLL
             return NewProductDetailDA.GetById(id);
         }
 
+        public ProductDetail GetProductByName(string name)
+        {
+            return NewProductDetailDA.GetProductByName(name);
+        }
+
         public IEnumerable<ProductDetail> GetByProductCategoryID(int CategoryCode)
         {
             return NewProductDetailDA.GetByProductCategoryID(CategoryCode);

@@ -66,5 +66,12 @@ namespace Inventory.Web.Controllers
             double Price = productDetailBs.GetPrice(ProductDetailID);
             return Price;
         }
+
+        [HttpGet]
+        [Route("GetProductByName")]
+        public IHttpActionResult GetProductByName(string name)
+        {
+            return Ok(productDetailBs.GetProductByName(name));
+        }
     }
 }

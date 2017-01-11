@@ -21,6 +21,11 @@ namespace Inventory.DAL
         {
             return context.ProductCategory.Where(c => c.ProductCategoryID == id).FirstOrDefault();
         }
+
+        public ProductCategory GetProductCategoryByName(string name)
+        {
+            return context.ProductCategory.Where(c => c.ProductCategoryName == name).FirstOrDefault();
+        }
         public void Insert(ProductCategory ProductCategoryObj)
         {
             context.ProductCategory.Add(ProductCategoryObj);
