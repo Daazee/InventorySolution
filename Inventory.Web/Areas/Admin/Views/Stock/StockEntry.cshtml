@@ -152,31 +152,31 @@
                 }
             })
 
-            //$('#ProductCategoryID').change(function () {
-            //    var ProductCategoryID = $('#ProductCategoryID').val();
-            //    $.ajax({
-            //        url: '../../api/ProductDetail/GetProductsByCategoryID',
-            //        cache: false,
-            //        type: 'GET',
-            //        contentType: 'application/json',
-            //        data: {
-            //            ProductCategoryID: ProductCategoryID
-            //        },
-            //        success: successFunc,
-            //        error: errorFunc
-            //    });
+            $('#ProductCategoryID').change(function () {
+                var ProductCategoryID = $('#ProductCategoryID').val();
+                $.ajax({
+                    url: '../../api/ProductDetail/GetProductsByCategoryID',
+                    cache: false,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    data: {
+                        ProductCategoryID: ProductCategoryID
+                    },
+                    success: successFunc,
+                    error: errorFunc
+                });
 
-            //    function successFunc(response) {
-            //        console.log(response[id]);
-            //        for (var i = 0; i <= response.length - 1; i++) {
-            //            console.log(i)
-            //            $('#ProductDetailID')
-            //           .append('<option value=' + response[i].ProductDetailID + '>' +
-            //             response[i].ProductName + '</option>')
+                function successFunc(response) {
+                    console.log(response[id]);
+                    for (var i = 0; i <= response.length - 1; i++) {
+                        console.log(i)
+                        $('#ProductDetailID')
+                       .append('<option value=' + response[i].ProductDetailID + '>' +
+                         response[i].ProductName + '</option>')
 
-            //        }
+                    }
 
-            //    }
+                }
 
             //    function errorFunc(error) {
             //        //alert("Error occured");//To avoid alerting if no internet connection.
