@@ -13,6 +13,7 @@ namespace Inventory.Web.Areas.Admin.Controllers
         ProductCategoryBs productCategoryBs = new ProductCategoryBs();
         ProductDetailBs productDetailBs = new ProductDetailBs();
         StockBs stockBs = new StockBs();
+        StockHistoryBs stockHistoryBs = new StockHistoryBs();
         public ActionResult Index()
         {
             return View();
@@ -23,6 +24,11 @@ namespace Inventory.Web.Areas.Admin.Controllers
             ViewBag.ProudctCategory = new SelectList(productCategoryBs.ListAll(), "ProductCategoryID", "ProductCategoryName");
             ViewBag.ProudctName = new SelectList(productDetailBs.ListAll(), "ProductDetailID", "ProductName");
             return View(stockBs.ListAll());
+        }
+
+        public ActionResult StockHistory()
+        {
+            return View(stockHistoryBs.ListAll());
         }
     }
 }

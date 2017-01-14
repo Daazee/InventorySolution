@@ -21,6 +21,11 @@ namespace Inventory.BLL
         {
             return NewProductCategoryDA.GetById(id);
         }
+
+        public ProductCategory GetProductCategoryByName(string name)
+        {
+            return NewProductCategoryDA.GetProductCategoryByName(name);
+        }
         public void Insert(ProductCategory ProductCategoryBsObj)
         {
             NewProductCategoryDA.Insert(ProductCategoryBsObj);

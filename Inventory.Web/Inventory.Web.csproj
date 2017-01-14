@@ -221,6 +221,7 @@
     <Compile Include="Controllers\ProductCategoryController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,6 +255,7 @@
     <Content Include="Areas\User\Views\Sales\SalesEntry.cshtml" />
     <Content Include="Areas\User\Views\Sales\_AddItem.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\ProductCategoryEntry.cshtml" />
+    <Content Include="Areas\Admin\Views\Stock\StockHistory.cshtml" />
     <None Include="Properties\PublishProfiles\InventoryApp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

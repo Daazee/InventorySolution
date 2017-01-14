@@ -40,8 +40,8 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-4 col-md-8">
-                            <span class="btn btn-primary" id="AddItem">Add Product</span>
-                            <input type="submit" value="Make Sales" class="btn btn-default" />
+                            <span class="btn btn-primary" id="AddItem" style="margin-right:10px;">Add Product</span>
+                            @*<input type="submit" value="Make Sales" class="btn btn-default" id="Save" />*@
                         </div>
                     </div>
                 </div>
@@ -55,6 +55,13 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                    <th style="width:100px !important; display:none">
+                                        Product Category ID
+                                    </th>
+                                    <th style="width:100px !important; display:none">
+                                        Product Detail ID
+                                    </th>
+
                                     <th style="width:100px !important">
                                        Product Category
                                     </th>

@@ -21,17 +21,52 @@
         </div>
         @Html.Partial("_AddItem")
 
-        @*<div class="form-group">
-                <div class="col-md-offset-6 col-md-6">
-                    <input type="submit" value="Make Sales" class="btn btn-default" />
+        <hr />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TransactionNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(model => model.TransactionNo, new { @class = "form-control", disabled = "disabled" })
+                                @Html.ValidationMessageFor(model => model.TransactionNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AmountPaid, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.AmountPaid, new { @class = "form-control", style = "width: 100px !important; float:left; margin-right:5px;" })
+                                <label for="Balance" class="control-label col-md-2">Balance</label>
+                                @*@Html.TextBoxFor(model => model.AmountPaid, new { @class = "form-control", disabled = "disabled", style = "width: 100px !important; float:left; margin-right:30px;" })*@
+                                <input type="text" id="Balance" name="Balance" class="form-control" disabled = "disabled", style = "width: 100px !important; float:left; margin-right:30px;" />
+
+                                @*<input type="text" id="ProdCatId" name="ProdCatId" style="display:none" />
+                                <input type="text" id="ProdDetId" name="ProdDetId" style="display:none" />*@
+                                <input type="text" id="ProdCatId" name="ProdCatId" />
+                                <input type="text" id="ProdDetId" name="ProdDetId"/>
+                                <input type="text" id="ReturnStatus" name="ReturnStatus" />
+                                <input type="text" id="ErrorStatus" name="ErrorStatus" />
+                            </div>
+                        </div>
+                      
+                    </div>
                 </div>
-            </div>*@
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Make Sales" class="btn btn-default" id="Save" />
+                        <a href='@Url.Action("PrintReceipt")' class="btn btn-default" id="Print" style="margin-left:20px;">Print Receipt</a>
+                        <input type="submit" value="Clear" class="btn btn-danger" id="clear" style="margin-left:20px;" />
+
+                    </div>
+                </div>
+            </div>
+<!-- Main form closure-->
     </div>
 }
-
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
 
 @section Scripts {
     <script>
@@ -40,28 +75,23 @@
             $('#ProductDetailID').change(function () {
                 $('#Rate').val("0.00");
                 $('#Quantity').val('');
-                $('#Amount').val('');
                 if ($('#ProductDetailID').val() != "") {
                     GetPrice();
                 }
-
-                if ($('#Quantity').val() != "" && $('#Rate').val() != "0.00") {
-                    GetCost();
-                }
             });
 
-            $('#Quantity').blur(function () {
-                $("#Amount").val("");
-                if ($('#Quantity').val() != "" && $('#Rate').val() != "0.00") {
-                    if ($.isNumeric($("#Quantity").val())) {
-                        GetCost();
-                    }
-                    else {
-                        alert("Quantity must be numeric");
-                        $('#Quantity').focus()
-                    }
-                }
-            });
+            //$('#Quantity').blur(function () {
+            //    $("#Amount").val("");
+            //    if ($('#Quantity').val() != "" && $('#Rate').val() != "0.00") {
+            //        if ($.isNumeric($("#Quantity").val())) {
+            //            GetCost();
+            //        }
+            //        else {
+            //            alert("Quantity must be numeric");
+            //            $('#Quantity').focus()
+            //        }
+            //    }
+            //});
 
 
             function GetPrice() {
@@ -88,19 +118,17 @@
                 }
             }
 
-            function GetCost() {
-                var Quantity = $('#Quantity').val();
-                var Price = $('#Rate').val();
-                $('#Amount').val(Quantity * Price);
-            }
-
 
             $('#AddItem').click(function () {
-                var ProductCategoryID = $("#ProductCategoryID :selected").text();
-                var ProductDetailID = $('#ProductDetailID :selected').text();
+                var Category = $("#ProductCategoryID :selected").text();
+                var ProductName = $('#ProductDetailID :selected').text();
+
+                var ProductCategoryID = $("#ProductCategoryID").val();
+                var ProductDetailID = $('#ProductDetailID').val();
+
                 var Rate = $('#Rate').val();
                 var Quantity = $('#Quantity').val();
-                var Amount = $('#Amount').val();
+                var Amount = Number(Rate) * Number(Quantity);
                 var Colour = $("#Colour :selected").text();
 
                 if (ProductCategoryID == "Select") {
@@ -126,13 +154,17 @@
                     var newRow = currentRow + 1
 
                     var newRec = [];
-                    newRec["Category"] = ProductCategoryID
-                    newRec["ProductName"] = ProductDetailID
+                    newRec["Category"] = Category
+                    newRec["ProductName"] = ProductName
+
+                    newRec["CategoryID"] = ProductCategoryID
+                    newRec["ProductID"] = ProductDetailID
+
                     newRec["UniPri"] = Rate
                     newRec["Qty"] = Quantity
                     newRec["Amt"] = Amount
 
-                    newRecRow = "<tr id='" + newRow + "' class='myRow'><td><label id='Category" + newRow + "' class='Category'>" + newRec["Category"] + "</label></td><td><label id='ProductName" + newRow + "'>" + newRec["ProductName"] + "</label></td><td><label id='UniPri" + newRow + "' id='UniPri'>" + newRec["UniPri"] + "</label></td><td><label id='Qty" + newRow + "'>" + newRec["Qty"] + "</label></td><td><label id='Amt" + newRow + "' class='Amt'>" + newRec["Amt"] + "</label></td><td><button id='rem" + newRow + "' class='btn btn-danger btn-sm rem'>Remove Item</button></td></tr>";
+                    newRecRow = "<tr id='" + newRow + "' class='myRow'> <td style='display:none'><label id='CategoryID" + newRow + "' class='CategoryID'>" + newRec["CategoryID"] + "</label></td><td style='display:none'><label id='ProductID" + newRow + "' class='ProductID'>" + newRec["ProductID"] + "</label></td><td><label id='Category" + newRow + "' class='Category'>" + newRec["Category"] + "</label></td><td><label id='ProductName" + newRow + "'>" + newRec["ProductName"] + "</label></td><td><label id='UniPri" + newRow + "' id='UniPri'>" + newRec["UniPri"] + "</label></td><td><label id='Qty" + newRow + "'>" + newRec["Qty"] + "</label></td><td><label id='Amt" + newRow + "' class='Amt'>" + newRec["Amt"] + "</label></td><td><button id='rem" + newRow + "' class='btn btn-danger btn-sm rem'>Remove Item</button></td></tr>";
 
                     $("#TableItem tbody").append(newRecRow);
                     totalItemsAmount();
@@ -141,26 +173,21 @@
                 }
             })
 
-            function CurrentDataToDb(category, productName, rate, quantity, amount, headerDetail) {
+            function CurrentDataToDb(category, productName, rate, quantity, totalAmount, headerDetail) {
                 var self = this;
 
                 var amountPaid = $('#AmountPaid').val();
-                var balance = $("#Balance").val();
-                var totalCostAmount = $("#totalAmt").text();
+                var totalProductCostAmount = $("#totalAmt").text();
 
                 self.ProductCategoryID = category;
                 self.ProductDetailID = productName;
                 self.Rate = rate;
                 self.Quantity = quantity;
-                self.Amount = amount;
-
-                self.Colour = colour;
-
+                self.totalAmount = totalAmount;
+                
                 self.AmountPaid = amountPaid;
-                self.Balance = balance;
-                self.TotalCostAmount = totalCostAmount;
+                self.totalProductCostAmount = totalProductCostAmount;
                 self.HeaderDetail = headerDetail;
-
             }
 
 
@@ -189,24 +216,20 @@
                             $("#TableItem  tr").each(function (i, row) {
                                 if (i > 1) {
                                     console.log((row))
-                                    //alert(i)
-                                    //alert(headerDetail)
-                                    //var tdFirst = $(this).find("td:first").html();
-                                    //var myValue = $(this).find("td:first label:first").html();
                                     var tdFirst = $(this).find("td").eq(0).html();
-                                    var clothDesc = $(this).find("td").eq(0).find("label").text();
-                                    var unitPrice = $(this).find("td").eq(1).find("label").text();
-                                    var quantity = $(this).find("td").eq(2).find("label").text();
-                                    var amount = $(this).find("td").eq(3).find("label").text();
-                                    var brandName = $(this).find("td").eq(4).find("label").text();
-                                    var colour = $(this).find("td").eq(5).find("label").text();
-                                    var starchLevel = $(this).find("td").eq(6).find("label").text();
-                                    var pressingOption = $(this).find("td").eq(7).find("label").text();
-                                    var collectionType = $(this).find("td").eq(8).find("label").text();
 
-                                    var request = new CurrentDataToDb(clothDesc, unitPrice, quantity, amount, brandName, colour, starchLevel, pressingOption, collectionType, headerDetail);
+                                    var productCatID = $(this).find("td").eq(0).find("label").text();
+                                    var productDetID = $(this).find("td").eq(1).find("label").text();
+
+                                  GetProductCategoryByName($(this).find("td").eq(2).find("label").text());
+                                  GetProductByName($(this).find("td").eq(3).find("label").text());
+                                    var rate = $(this).find("td").eq(4).find("label").text();
+                                    var quantity = $(this).find("td").eq(5).find("label").text();
+                                    var totalAmount = $(this).find("td").eq(6).find("label").text();
+
+                                    var request = new CurrentDataToDb(productCatID, productDetID, rate, quantity, totalAmount, headerDetail);
                                     $.ajax({
-                                        url: '@Url.Action("Transact", new { Controller="Transaction", Area= "User" })',
+                                        url: '@Url.Action("MakeSales", new { Controller="Sales", Area= "User" })',
                                         dataType: 'json',
                                         contentType: "application/json",
                                         type: "POST",
@@ -215,9 +238,6 @@
                                             $('#message').text("Record save successfully");
                                             $('#TransactionNo').val(response.transNo);
                                             $('#MyTrNo').val(response.transNo);
-                                            $('#CustomerTag').val(response.tag);
-                                            //$('#TransactionNo').val(response.TransactionNo);
-                                            //$('#CustomerTag').val(response.CustomerTag);
                                         }
                                     });
                                     headerDetail = "D"
@@ -233,8 +253,7 @@
                     }
                 }
                 else {
-                    alert("Please add cloth before saving");
-                    // $('#message').val("Please add cloth before saving");
+                    alert("Please add product saving before saving");
                 }
             });
 
@@ -259,11 +278,7 @@
                 $('#ProductDetailID').val("0.00");
                 $('#Quantity').val("");
                 $('#Amount').val("");
-                $('#Colour').val("");
-                $('#CollectionType').val("");
-                $('#StarchLevel').val("");
-                $('#PressingOption').val(""); BrandName
-                $('#BrandName').val("");
+                $('#Rate').val("");
             }
 
             $("#TableItem").on('click', '.rem', function () {
@@ -287,17 +302,17 @@
                 $('#message').text("");
                 $("#Balance").val("");
                 if ($('#AmountPaid').val() != "") {
-                    // if ($("#PaymentMode").val() != "" && $('#totalAmt').text() != "") {
                     if ($('#totalAmt').text() != "") {
                         if ($.isNumeric($("#AmountPaid").val())) {
-                            var totalAmount = Number($('#totalAmt').text()) + Number($('#ExpressAmount').val());
-                            if (totalAmount >= Number($("#AmountPaid").val())) {
-                                var bal = totalAmount - Number($("#AmountPaid").val())
-                                $("#Balance").val(bal);
+                            var totalAmount = Number($('#totalAmt').text());
+                            if (totalAmount > Number($("#AmountPaid").val())) {
+                                $('#message').text("Payment is less than cost of meal");
+                                $("#AmountPaid").focus();
                             }
                             else {
-                                $('#message').text("Amount paid is greater than Total Cost");
-                                $("#AmountPaid").focus();
+                                var bal = Number($("#AmountPaid").val()) - totalAmount
+                                $("#Balance").val(bal);
+                               
                             }
 
                         }
@@ -308,127 +323,10 @@
                     }
                     else {
                         $("#AmountPaid").val('');
-                        //alert("Please select payment mode and ensured that you have added clothes");
-                        alert("Please ensure that you have added clothes");
+                        alert("Please ensure that you have added product");
                     }
                 }
             });
-
-
-            $('#CustomerPhone').blur(function () {
-                if ($('#CustomerPhone').val() != "") {
-
-                    GetCustomerByPhoneNumber();
-                    $('#Next1').focus();
-                }
-            });
-
-            function GetCustomerByPhoneNumber() {
-                phone = $('#CustomerPhone').val();
-                $.ajax({
-                    type: "GET",
-
-                    url: '@Url.Action("GetCustomerByPhoneNumber", new { Controller="Search", Area= "Customer" })',
-
-                    data: {
-                        phone: phone
-                    },
-                    success: function (response) {
-                        console.log(response)
-                        if (response != null) {
-                            $('#Surname').val(response.Surname);
-                            $('#Othername').val(response.Othername);
-                            $('#EmailAddress').val(response.EmailAddress);
-
-                        } else {
-
-                        }
-                    },
-
-                    failure: function (msg) {
-                        // $('#output').text(msg);
-
-                    }
-                });
-
-            }
-
-            $('#EmailAddress').blur(function () {
-                if ($('#EmailAddress').val() != "") {
-                    GetCustomerByEmail();
-                    $('#Next1').focus();
-                }
-            });
-
-            function GetCustomerByEmail() {
-                var email = $('#EmailAddress').val();
-                $.ajax({
-                    type: "GET",
-
-                    url: '@Url.Action("GetCustomerByEmail", new { Controller="Search", Area= "Customer" })',
-
-                    data: {
-                        email: email
-                    },
-                    success: function (response) {
-                        console.log(response)
-                        if (response != null) {
-                            $('#Surname').val(response.Surname);
-                            $('#Othername').val(response.Othername);
-                            $('#CustomerPhone').val(response.CustomerPhone)
-                        } else {
-
-                        }
-                    },
-
-                    failure: function (msg) {
-                        // $('#output').text(msg);
-
-                    }
-                })
-            }
-
-            var navListItems = $('div.setup-panel div a'),
-            allWells = $('.setup-content'),
-            allNextBtn = $('.nextBtn');
-
-            allWells.hide();
-
-            navListItems.click(function (e) {
-                e.preventDefault();
-                var $target = $($(this).attr('href')),
-                        $item = $(this);
-
-                if (!$item.hasClass('disabled')) {
-                    navListItems.removeClass('btn-primary').addClass('btn-default');
-                    $item.addClass('btn-primary');
-                    allWells.hide();
-                    $target.show();
-                    $target.find('input:eq(0)').focus();
-                }
-            });
-
-            allNextBtn.click(function () {
-                var curStep = $(this).closest(".setup-content"),
-                    curStepBtn = curStep.attr("id"),
-                    nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-                    curInputs = curStep.find("input[type='text'],input[type='url']"),
-                    isValid = true;
-
-                $(".form-group").removeClass("has-error");
-                for (var i = 0; i < curInputs.length; i++) {
-                    if (!curInputs[i].validity.valid) {
-                        isValid = false;
-                        $(curInputs[i]).closest(".form-group").addClass("has-error");
-                    }
-                }
-
-                if (isValid)
-                    nextStepWizard.removeAttr('disabled').trigger('click');
-            });
-
-            $('div.setup-panel div a.btn-primary').trigger('click');
-
         });
 
         function confirmSaveAction() {
@@ -442,6 +340,68 @@
 
         }
 
+        function GetProductCategoryByName(name) {
+            $.ajax({
+                url: '../../api/ProductCategory/GetProductCategoryByName',
+                cache: false,
+                type: 'GET',
+                contentType: 'application/json',
+                data: {
+                    name: name
+                },
+                success: successFunc,
+                error: errorFunc
+            });
+
+            function successFunc(response) {
+                console.log(response);
+                $('#ProdCatId').val(response.ProductCategoryID);
+                $('#ReturnStatus').val('Y');
+            }
+
+            function errorFunc(error) {
+                console.log(error); 
+                $('#ErrorStatus').val(error);
+                $('#ReturnStatus').val('N');
+            }
+
+            if ($('#ReturnStatus').val() == "Y")
+                return $('#ProdCatId').val()
+            else
+                alert($('#ErrorStatus').val())
+        }
+
+        function GetProductByName(name) {
+            $.ajax({
+                url: '../../api/ProductDetail/GetProductByName',
+                cache: false,
+                type: 'GET',
+                contentType: 'application/json',
+                data: {
+                    name: name
+                },
+                success: successFunc,
+                error: errorFunc
+            });
+
+            function successFunc(response) {
+                console.log(response);
+                $('#ProdDetId').val(response.ProductDetailID)
+                $('#ErrorStatus').val(error);
+            }
+
+            function errorFunc(error) {
+                console.log(error);
+                $('#ErrorStatus').val(error);
+                $('#ReturnStatus').val('N');
+            }
+
+            if($('#ReturnStatus').val() =="Y")
+                return $('#ProdDetId').val()
+            else
+                alert( $('#ErrorStatus').val())
+        }
+       
         function ClearAll() {
             $("#ClothCode").val("");
             $('#UnitPrice').val("0.00");

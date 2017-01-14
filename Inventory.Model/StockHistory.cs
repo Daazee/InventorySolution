@@ -36,5 +36,7 @@ namespace Inventory.Model
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ModifiedOn { get; set; }
 
+        public virtual ProductDetail ProductDetail { get; set; }
+
     }
 }
