@@ -1,1 +1,11 @@
 # Add any directories, files, or patterns you don't want to be tracked by version control
+*.dll
+*.suo
+Inventory.BLL/obj
+Inventory.DAL/obj
+Inventory.Model/obj
+Inventory.Web/obj
+Inventory.BLL/bin
+Inventory.DAL/bin
+Inventory.Model/bin
+Inventory.Web/bin
