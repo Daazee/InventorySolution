@@ -39,10 +39,13 @@ namespace Inventory.BLL
         public void Update(Stock StockObj)
         {
             var ExistingStock = GetByProductDetailID(StockObj.ProductDetailID);
-            ExistingStock.StockLevel = StockObj.StockLevel;
-            ExistingStock.ModifiedBy = StockObj.ModifiedBy;
-            ExistingStock.ModifiedOn = StockObj.ModifiedOn;
-            NewStockDA.Update(ExistingStock);
+            if (ExistingStock != null)
+            {
+                ExistingStock.StockLevel = StockObj.StockLevel;
+                ExistingStock.ModifiedBy = StockObj.ModifiedBy;
+                ExistingStock.ModifiedOn = StockObj.ModifiedOn;
+                NewStockDA.Update(ExistingStock);
+            }
         }
 
         public void Delete(int id)

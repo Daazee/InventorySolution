@@ -197,9 +197,9 @@
                         alert("Amount paid must be numeric");
                         $('#AmountPaid').focus();
                     }
-                    else if ($("#Balance").val() == "") {
-                        alert("Balance must not be empty, please ensure transaction is entered correctly");
-                        $('#AmountPaid').focus();
+                    else if (Number($('#totalAmt').text()) > Number($("#AmountPaid").val())) {
+                        $('#message').text("Payment is less than cost of meal");
+                        $("#AmountPaid").focus();
                     }
                     else {
                         var r = confirm("Are you sure you want to SAVE transaction");

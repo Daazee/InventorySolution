@@ -54,9 +54,13 @@
 
                 <li>@Html.ActionLink("Stock History", "StockHistory", new { Controller = "Stock", Area = "Admin" })</li>
 
-                <li>
+                <li>@Html.ActionLink("Print Receipt", "PrintReceipt", new { Controller = "Sales", Area = "User" })</li>
+
+                <li>@Html.ActionLink("Print Sales Report", "SalesReport", new { Controller = "Report", Area = "User" })</li>
+
+                @*<li>
                     <a href="#"><i class="glyphicon glyphicon-barcode icon-sidebar-margin-right"></i> Services</a>
-                </li>
+                </li>*@
                 <li>@Html.ActionLink("Logout", "Logout", new { Controller = "Access", Area = "Security" })</li>
             </ul>
         </div>

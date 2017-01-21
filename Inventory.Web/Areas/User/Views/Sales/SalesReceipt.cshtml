@@ -14,8 +14,8 @@
                     <tr>
                         <th colspan="4">
 
-                            @Model.CompanyDetailReceipt.First().CompanyName
-                        </th>
+                            <center>  @Model.CompanyDetailReceipt.First().CompanyName</center>
+</th>
                     </tr>
                 </thead>
                 <tr>
@@ -127,12 +127,12 @@
             </table>
         </div>
     </div>
-    <table style="margin-top:10px;" width="600">
+    <table style="margin-top:10px;" width="340">
         <tr>
             <td>
                 <input type="text" value="@Model.SalesReceipt.First().TransactionNo" id="TransactionNo" style="display:none" />
             </td>
-            <td align="center">
+            <td align="right">
                 <input type="submit" id="PrintReceipt" value="Print Receipt" class="btn-primary" style="width:100px" />
             </td>
         </tr>
