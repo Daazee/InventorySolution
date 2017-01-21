@@ -77,6 +77,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -211,7 +212,12 @@
     <Compile Include="Areas\Admin\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Admin\Controllers\StockController.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
+    <Compile Include="Areas\Common\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Security\Controllers\AccessController.cs" />
+    <Compile Include="Areas\Security\Controllers\RegistrationController.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
+    <Compile Include="Areas\User\Controllers\PaymentController.cs" />
+    <Compile Include="Areas\User\Controllers\ReportController.cs" />
     <Compile Include="Areas\User\Controllers\SalesController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -229,9 +235,11 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportDataset\InventoryDs.Designer.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Security\Views\web.config" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\simple-sidebar.css" />
@@ -247,7 +255,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Common\Views\web.config" />
-    <Content Include="Areas\Security\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\ProductDetail\ProductEntry.cshtml" />
@@ -256,7 +263,24 @@
     <Content Include="Areas\User\Views\Sales\_AddItem.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\ProductCategoryEntry.cshtml" />
     <Content Include="Areas\Admin\Views\Stock\StockHistory.cshtml" />
+    <Content Include="Areas\Common\Views\Menu\Index.cshtml" />
+    <Content Include="Areas\Security\Views\Access\Login.cshtml" />
+    <Content Include="Areas\Security\Views\Registration\UserRegistration.cshtml" />
+    <Content Include="Areas\User\Views\Report\SalesReport.cshtml" />
+    <Content Include="Areas\User\Views\Sales\PrintReceipt.cshtml" />
+    <Content Include="Areas\User\Views\Sales\SalesReceipt.cshtml" />
     <None Include="Properties\PublishProfiles\InventoryApp.pubxml" />
+    <Content Include="ReportDataset\InventoryDs.xsc">
+      <DependentUpon>InventoryDs.xsd</DependentUpon>
+    </Content>
+    <None Include="ReportDataset\InventoryDs.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InventoryDs1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ReportDataset\InventoryDs.xss">
+      <DependentUpon>InventoryDs.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -311,13 +335,12 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Settings\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Common\Controllers\" />
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Common\Views\Shared\" />
-    <Folder Include="Areas\Security\Controllers\" />
     <Folder Include="Areas\Security\Models\" />
     <Folder Include="Areas\Security\Views\Shared\" />
     <Folder Include="Areas\User\Models\" />
+    <Folder Include="Areas\User\Views\Payment\" />
     <Folder Include="Areas\User\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +360,10 @@
       <Project>{4af1661f-21fd-4081-aae2-fc03a6538839}</Project>
       <Name>Inventory.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\CompanyHeader.rdlc" />
+    <EmbeddedResource Include="Reports\SalesReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

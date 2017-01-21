@@ -46,7 +46,9 @@
     <Compile Include="CompanyLogo.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="EmailSetting.cs" />
+    <Compile Include="PaymentDetail.cs" />
     <Compile Include="ProductDetailNonCyclical.cs" />
+    <Compile Include="Receipt.cs" />
     <Compile Include="Sales.cs" />
     <Compile Include="StockHistory.cs" />
     <Compile Include="Stock.cs" />

@@ -67,3 +67,6 @@ E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Web.Tests\bin\Debug\Inve
 E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Web.Tests\obj\Debug\Inventory.Web.Tests.csprojResolveAssemblyReference.cache
 E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Web.Tests\obj\Debug\Inventory.Web.Tests.dll
 E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Web.Tests\obj\Debug\Inventory.Web.Tests.pdb
+E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.Web.Tests\obj\Debug\Inventory.Web.Tests.csprojResolveAssemblyReference.cache
+E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.Web.Tests\obj\Debug\Inventory.Web.Tests.dll
+E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.Web.Tests\obj\Debug\Inventory.Web.Tests.pdb
