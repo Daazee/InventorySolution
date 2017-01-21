@@ -14,6 +14,19 @@ namespace Inventory.Web.Areas.User.Controllers
         ProductDetailBs productDetailBs = new ProductDetailBs();
         SalesBs salesBs = new SalesBs();
         Sales salesObjMain = new Sales();
+       
+
+        StockBs stockBs = new StockBs();
+        Stock StockObj = new Stock();
+
+        CompanyDetailBs companyDetailBs = new CompanyDetailBs();
+        CompanyDetail CompanyDetailObj = new CompanyDetail();
+        PaymentDetailBs paymentDetailBs = new PaymentDetailBs();
+        PaymentDetail PaymentDetailObj = new PaymentDetail();
+        CompanyLogoBs companyLogoBs = new CompanyLogoBs();
+        CompanyLogo CompanyLogoObj = new CompanyLogo();
+        UserBs userBs = new UserBs();
+        Receipt receipt = new Receipt();
         // GET: User/Sales
         public ActionResult Index()
         {
@@ -69,15 +82,20 @@ namespace Inventory.Web.Areas.User.Controllers
 
             if (SalesObj.HeaderDetail == "H")
             {
-                salesObjMain.TransactionNo = GenerateTransNo();
+                PaymentDetailObj.PaymentNo =  salesObjMain.TransactionNo = GenerateTransNo();
+                PaymentDetailObj.SalesAmount =  Convert.ToDouble(SalesObj.TotalProductCostAmount);
+                PaymentDetailObj.CreatedBy = "admin"; //ViewBag.UserId;
+                PaymentDetailObj.Flag = "A";
+                PaymentDetailObj.KeyDate = DateTime.Today;
+                paymentDetailBs.Insert(PaymentDetailObj);
             }
             else
             {
                 salesObjMain.TransactionNo = Session["TransactionNo"].ToString(); ;
             }
 
-            salesObjMain.ProductCategoryID = SalesObj.ProductCategoryID;
-            salesObjMain.ProductDetailID = SalesObj.ProductDetailID;
+            StockObj.ProductCategoryID = salesObjMain.ProductCategoryID = SalesObj.ProductCategoryID;
+            StockObj.ProductDetailID = salesObjMain.ProductDetailID = SalesObj.ProductDetailID;
             salesObjMain.Rate = Convert.ToDouble(SalesObj.Rate);
             salesObjMain.Quantity = SalesObj.Quantity;
             salesObjMain.TotalAmount = Convert.ToDouble(SalesObj.TotalAmount);
@@ -87,9 +105,14 @@ namespace Inventory.Web.Areas.User.Controllers
             salesObjMain.HeaderDetail = SalesObj.HeaderDetail;
             salesObjMain.CreatedBy = "admin";
             salesObjMain.CreatedOn = DateTime.Today;
-            salesObjMain.ModifiedBy = "admin";
-            salesObjMain.ModifiedOn = DateTime.Today;
+            StockObj.ModifiedBy = salesObjMain.ModifiedBy = "admin";
+            StockObj.ModifiedOn = salesObjMain.ModifiedOn = DateTime.Today;
             salesBs.Insert(salesObjMain);
+
+            int CurrentStockLevel = stockBs.GetStockLevelByProductDetailID(StockObj.ProductDetailID);
+            StockObj.StockLevel = CurrentStockLevel - SalesObj.Quantity;
+            stockBs.Update(StockObj);
+
             return Json(new { transNo = salesObjMain.TransactionNo}, JsonRequestBehavior.AllowGet);
         }
 
@@ -109,6 +132,78 @@ namespace Inventory.Web.Areas.User.Controllers
             int NewTransNo = LastTransNo + 1;
             TransNo = TransNo + "/" + NewTransNo.ToString();
             return TransNo;
+        }
+
+        [HttpGet]
+        public ActionResult PrintReceipt()
+        {
+            //try
+            //{
+            //    ViewBag.UserId = Session["Username"].ToString();
+            //}
+            //catch
+            //{
+            //    Session["ConfirmLogin"] = "You must login first";
+            //    return RedirectToAction("Login", new { Area = "Security", Controller = "Access" });
+            //}
+            if (Session["TransactionNo"] != null)
+            {
+                salesObjMain.TransactionNo = Session["TransactionNo"].ToString();
+            }
+            return View(salesObjMain);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult PrintReceipt(FormCollection frm)
+        {
+           
+            Session["FinalTransNo"] = frm["TransactionNo"];
+            return RedirectToAction("SalesReceipt");
+        }
+
+        [HttpGet]
+        public ActionResult SalesReceipt(string TNo)
+        {
+            string GetUserOnce = "Y";
+            Model.User UserReceipt = new Model.User();
+            CompanyLogo CompanyLogoReceipt = new CompanyLogo();
+            List<Sales> SalesReceipt = new List<Sales>();
+            List<CompanyDetail> CompanyDetailReceipt = new List<CompanyDetail>();
+            List<PaymentDetail> PaymentDetailReceipt = new List<PaymentDetail>();
+            //try
+            //{
+            //    ViewBag.UserId = Session["Username"].ToString();
+            //}
+            //catch
+            //{
+            //    Session["ConfirmLogin"] = "You must login first";
+            //    return RedirectToAction("Login", new { Area = "Security", Controller = "Access" });
+            //}
+            if (Session["FinalTransNo"] != null)
+            {
+                SalesReceipt = salesBs.GetByTransactionNo(Session["FinalTransNo"].ToString()).ToList();
+                CompanyDetailReceipt = companyDetailBs.ListAll().ToList();
+                PaymentDetailReceipt = paymentDetailBs.GetByPaymentNo(Session["FinalTransNo"].ToString()).ToList();
+                CompanyLogoReceipt = companyLogoBs.GetCompanyLogo();
+   
+                if (GetUserOnce == "Y")
+                {
+                    foreach (var item in SalesReceipt)
+                        UserReceipt = userBs.GetByUsername(item.CreatedBy);
+                    GetUserOnce = "N";
+                }
+               
+                receipt.SalesReceipt = SalesReceipt;
+                receipt.CompanyDetailReceipt = CompanyDetailReceipt;
+                receipt.UserReceipt = UserReceipt;
+                receipt.PaymentDetailReceipt = PaymentDetailReceipt;
+                receipt.CompanyLogoReceipt = CompanyLogoReceipt;
+                //receipt.CustomerReceipt = CustomerReceipt;
+                return View(receipt);
+
+            }
+            return View();
         }
 
     }

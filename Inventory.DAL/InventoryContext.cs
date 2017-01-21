@@ -19,6 +19,9 @@ namespace Inventory.DAL
 
         public DbSet<Sales> Sales { get; set; }
 
+        public DbSet<PaymentDetail> PaymentDetails { get; set; }
+
+
         public DbSet<Stock> Stocks { get; set; }
 
         public DbSet<Codes> Code { get; set; }

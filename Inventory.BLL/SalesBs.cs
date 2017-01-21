@@ -51,5 +51,10 @@ namespace Inventory.BLL
             return NewSalesDA.GetLastTransNo(TNo);
         }
 
+        public IEnumerable<Sales> GetByTransactionNo(string TransNo)
+        {
+            return NewSalesDA.GetByTransactionNo(TransNo);
+        }
+
     }
 }

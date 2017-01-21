@@ -22,49 +22,42 @@
         @Html.Partial("_AddItem")
 
         <hr />
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.TransactionNo, htmlAttributes: new { @class = "control-label col-md-4" })
-                            <div class="col-md-8">
-                                @Html.TextBoxFor(model => model.TransactionNo, new { @class = "form-control", disabled = "disabled" })
-                                @Html.ValidationMessageFor(model => model.TransactionNo, "", new { @class = "text-danger" })
-                            </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TransactionNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.TransactionNo, new { @class = "form-control", disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.TransactionNo, "", new { @class = "text-danger" })
                         </div>
-
                     </div>
-                    <div class="col-md-6">
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.AmountPaid, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(model => model.AmountPaid, new { @class = "form-control", style = "width: 100px !important; float:left; margin-right:5px;" })
-                                <label for="Balance" class="control-label col-md-2">Balance</label>
-                                @*@Html.TextBoxFor(model => model.AmountPaid, new { @class = "form-control", disabled = "disabled", style = "width: 100px !important; float:left; margin-right:30px;" })*@
-                                <input type="text" id="Balance" name="Balance" class="form-control" disabled = "disabled", style = "width: 100px !important; float:left; margin-right:30px;" />
-
-                                @*<input type="text" id="ProdCatId" name="ProdCatId" style="display:none" />
-                                <input type="text" id="ProdDetId" name="ProdDetId" style="display:none" />*@
-                                <input type="text" id="ProdCatId" name="ProdCatId" />
-                                <input type="text" id="ProdDetId" name="ProdDetId"/>
-                                <input type="text" id="ReturnStatus" name="ReturnStatus" />
-                                <input type="text" id="ErrorStatus" name="ErrorStatus" />
-                            </div>
-                        </div>
-                      
-                    </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Make Sales" class="btn btn-default" id="Save" />
-                        <a href='@Url.Action("PrintReceipt")' class="btn btn-default" id="Print" style="margin-left:20px;">Print Receipt</a>
-                        <input type="submit" value="Clear" class="btn btn-danger" id="clear" style="margin-left:20px;" />
+                <div class="col-md-6">
 
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AmountPaid, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.AmountPaid, new { @class = "form-control", style = "width: 100px !important; float:left; margin-right:5px;" })
+                            <label for="Balance" class="control-label col-md-2">Balance</label>
+                            @*@Html.TextBoxFor(model => model.AmountPaid, new { @class = "form-control", disabled = "disabled", style = "width: 100px !important; float:left; margin-right:30px;" })*@
+                            <input type="text" id="Balance" name="Balance" class="form-control" disabled="disabled" , style="width: 100px !important; float:left; margin-right:30px;" />
+                        </div>
                     </div>
+
                 </div>
             </div>
-<!-- Main form closure-->
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Make Sales" class="btn btn-default" id="Save" />
+                    <a href='@Url.Action("PrintReceipt")' class="btn btn-default" id="Print" style="margin-left:20px;">Print Receipt</a>
+                    <input type="submit" value="Clear" class="btn btn-danger" id="clear" style="margin-left:20px;" />
+
+                </div>
+            </div>
+        </div>
+        <!-- Main form closure-->
     </div>
 }
 
@@ -184,7 +177,7 @@
                 self.Rate = rate;
                 self.Quantity = quantity;
                 self.totalAmount = totalAmount;
-                
+
                 self.AmountPaid = amountPaid;
                 self.totalProductCostAmount = totalProductCostAmount;
                 self.HeaderDetail = headerDetail;
@@ -221,8 +214,8 @@
                                     var productCatID = $(this).find("td").eq(0).find("label").text();
                                     var productDetID = $(this).find("td").eq(1).find("label").text();
 
-                                  GetProductCategoryByName($(this).find("td").eq(2).find("label").text());
-                                  GetProductByName($(this).find("td").eq(3).find("label").text());
+                                    GetProductCategoryByName($(this).find("td").eq(2).find("label").text());
+                                    GetProductByName($(this).find("td").eq(3).find("label").text());
                                     var rate = $(this).find("td").eq(4).find("label").text();
                                     var quantity = $(this).find("td").eq(5).find("label").text();
                                     var totalAmount = $(this).find("td").eq(6).find("label").text();
@@ -312,7 +305,7 @@
                             else {
                                 var bal = Number($("#AmountPaid").val()) - totalAmount
                                 $("#Balance").val(bal);
-                               
+
                             }
 
                         }
@@ -355,20 +348,11 @@
 
             function successFunc(response) {
                 console.log(response);
-                $('#ProdCatId').val(response.ProductCategoryID);
-                $('#ReturnStatus').val('Y');
             }
 
             function errorFunc(error) {
-                console.log(error); 
-                $('#ErrorStatus').val(error);
-                $('#ReturnStatus').val('N');
+                console.log(error);
             }
-
-            if ($('#ReturnStatus').val() == "Y")
-                return $('#ProdCatId').val()
-            else
-                alert($('#ErrorStatus').val())
         }
 
         function GetProductByName(name) {
@@ -386,22 +370,13 @@
 
             function successFunc(response) {
                 console.log(response);
-                $('#ProdDetId').val(response.ProductDetailID)
-                $('#ErrorStatus').val(error);
             }
 
             function errorFunc(error) {
                 console.log(error);
-                $('#ErrorStatus').val(error);
-                $('#ReturnStatus').val('N');
             }
-
-            if($('#ReturnStatus').val() =="Y")
-                return $('#ProdDetId').val()
-            else
-                alert( $('#ErrorStatus').val())
         }
-       
+
         function ClearAll() {
             $("#ClothCode").val("");
             $('#UnitPrice').val("0.00");

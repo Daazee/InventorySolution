@@ -66,5 +66,11 @@ namespace Inventory.DAL
             return LastTransNo;
         }
 
+        public IEnumerable<Sales> GetByTransactionNo(string TransNo)
+        {
+            return context.Sales.Where(c => c.TransactionNo == TransNo).ToList();
+        }
+
+
     }
 }

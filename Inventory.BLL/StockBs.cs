@@ -41,6 +41,7 @@ namespace Inventory.BLL
             var ExistingStock = GetByProductDetailID(StockObj.ProductDetailID);
             ExistingStock.StockLevel = StockObj.StockLevel;
             ExistingStock.ModifiedBy = StockObj.ModifiedBy;
+            ExistingStock.ModifiedOn = StockObj.ModifiedOn;
             NewStockDA.Update(ExistingStock);
         }
 

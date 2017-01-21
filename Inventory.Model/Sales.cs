@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Inventory.Model
 {
@@ -17,6 +18,7 @@ namespace Inventory.Model
         public int ProductCategoryID { get; set; }
 
         [Display(Name = "Product Code")]
+        [ForeignKey("ProductDetail")]
         public int ProductDetailID { get; set; }
 
         public int Quantity { get; set; }
@@ -41,6 +43,8 @@ namespace Inventory.Model
         public string ModifiedBy { get; set; }
 
         public DateTime ModifiedOn { get; set; }
+
+        public virtual ProductDetail ProductDetail { get; set; }
 
     }
 }

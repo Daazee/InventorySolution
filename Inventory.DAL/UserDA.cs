@@ -25,12 +25,12 @@ namespace Inventory.DAL
         }
 
 
-        public IEnumerable<User> ListAllByStatus(int status)
+        public IEnumerable<User> ListAllByStatus(string status)
         {
             return context.Users.Where(c=>c.Status==status).ToList();
         }
 
-        public string UpdateStatus(string username, int status)
+        public string UpdateStatus(string username, string status)
         {
             var search = context.Users.Where(c => c.Username == username).FirstOrDefault();
             search.Status = status;

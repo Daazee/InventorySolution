@@ -4,7 +4,7 @@ namespace Inventory.DAL.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-
+    using Inventory.Model;
     internal sealed class Configuration : DbMigrationsConfiguration<Inventory.DAL.InventoryContext>
     {
         public Configuration()
@@ -28,6 +28,38 @@ namespace Inventory.DAL.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            User UserObj = new User();
+            UserObj.Surname = "Administrator";
+            UserObj.Othername = "Administrator";
+            UserObj.Sex = "Male";
+            UserObj.PhoneNumber = "07053900429";
+            UserObj.Address = "TBA";
+            UserObj.Username = "admin";
+            UserObj.Password = "admin";
+            UserObj.Status = "1";
+            UserObj.Role = "A";
+            UserObj.Flag = "A";
+            UserObj.Keydate = DateTime.Now;
+            context.Users.AddOrUpdate(c => c.Username, UserObj);
+
+
+            CompanyDetail CompanyDetailObj = new CompanyDetail();
+            CompanyDetailObj.CompanyCode = "Test";
+            CompanyDetailObj.CompanyName = "Test Inventory";
+            CompanyDetailObj.CompanyShortName = "Test Inventory";
+            CompanyDetailObj.CompanyAddress = "Lagos";
+            CompanyDetailObj.CompanyPhone1 = "07053900429";
+            CompanyDetailObj.CompanyPhone2 = "07053900429";
+            CompanyDetailObj.CompanyEmail = "test@yahoo.com";
+            CompanyDetailObj.CompanyUsername = "admin";
+            CompanyDetailObj.CompanyPassword = "admin";
+            CompanyDetailObj.Flag = "A";
+            CompanyDetailObj.CreatedOn = DateTime.Now;
+            CompanyDetailObj.CreatedBy = "admin";
+            CompanyDetailObj.ModifiedOn = DateTime.Now;
+            CompanyDetailObj.ModifiedBy = "admin";
+            context.CompanyDetails.AddOrUpdate(c => c.CompanyUsername, CompanyDetailObj);
         }
     }
 }
