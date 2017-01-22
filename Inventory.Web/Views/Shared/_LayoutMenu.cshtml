@@ -41,6 +41,8 @@
                 @*<li class="sidebar-brand">@Html.ActionLink("Dashboard", "Dashboard", new { Controller = "Settings", Area = "Admin" })</li>*@
 
                 <li>@Html.ActionLink("Dashboard", "Dashboard", new { Controller = "Settings", Area = "Admin" })</li>
+
+                <li>@Html.ActionLink("Users", "ListUsers", new { Controller = "ManageUser", Area = "Admin" })</li>
                 
                 <li>@Html.ActionLink("Product Category", "ProductCategoryEntry", new { Controller = "ProductCategory", Area = "Admin" })</li>
 
@@ -50,7 +52,7 @@
 
                 <li>@Html.ActionLink("Stock Entry", "StockEntry", new { Controller = "Stock", Area = "Admin" })</li>
 
-                <li>@Html.ActionLink("Stock Level", "Stock Level", new { Controller = "Transaction", Area = "User" })</li>
+                <li>@Html.ActionLink("Stock Level", "StockLevel", new { Controller = "Stock", Area = "Admin" })</li>
 
                 <li>@Html.ActionLink("Stock History", "StockHistory", new { Controller = "Stock", Area = "Admin" })</li>
 
