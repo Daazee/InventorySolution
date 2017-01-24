@@ -86,7 +86,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.StockLevel)
                     </th>
-                    <th></th>
                 </tr>
             </thead>
 
@@ -103,11 +102,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.StockLevel)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.StockID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.StockID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.StockID })
                         </td>
                     </tr>
                 }

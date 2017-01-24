@@ -144,7 +144,7 @@
 
                 var ProductCategoryID = $("#ProductCategoryID").val();
                 var ProductDetailID = $('#ProductDetailID').val();
-
+                var StockLevel = $('#StockLevel').val();
                 var Rate = $('#Rate').val();
                 var Quantity = $('#Quantity').val();
                 var Amount = Number(Rate) * Number(Quantity);
@@ -159,12 +159,22 @@
                     alert("Please select a product")
                     $('#message').text("Please select a product");
                 }
-
+                else if(StockLevel ==""){
+                    alert("Stock Level must not be empty")
+                    $('#message').text("Stock Level must not be empty");
+                }
+                else if (StockLevel == 0) {
+                    alert("There is no product in stock")
+                    $('#message').text("There is no product in stock");
+                }
                 else if (Quantity == "" || Quantity == 0) {
                     alert("Quantity must not be empty or zero")
                     $('#message').text("Quantity must not be empty or zero");
                 }
-
+                else if (Number(Quantity)  > Number(StockLevel) ){
+                    alert("Quantity willing to purchase is greater than number of product in stock")
+                    $('#message').text("Quantity willing to purchase is greater than number of product in stock");
+                }
                 else {
                     var totalRowCount = $("#TableItem tr").length;
                     var rowCount = $("#TableItem td").closest("tr").length;

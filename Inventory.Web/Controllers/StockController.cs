@@ -53,7 +53,7 @@ namespace Inventory.Web.Controllers
             }
             
             stockHistoryBs.Insert(StockHistoryObj);
-            message = "Product added successfully";
+            message = "Stock updated successfully";
             return message;
         }
 

@@ -80,14 +80,15 @@
                     <th>
                         @Html.DisplayNameFor(model => model.ProductName)
                     </th>
-                 
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </th>
                     <th>
                         Created On
-                    </th>
-                    <th></th>
+                    </th>                  
                 </tr>
             </thead>
 
@@ -104,15 +105,13 @@
                             @Html.DisplayFor(modelItem => item.ProductName)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.CreatedBy)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.KeyDate)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductDetailID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ProductDetailID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductDetailID })
                         </td>
                     </tr>
                 }

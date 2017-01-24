@@ -70,7 +70,7 @@
                     @*<th>
                             @Html.DisplayNameFor(model => model.ProductCategoryID)
                         </th>*@
-                    <th></th>
+                   
                 </tr>
             </thead>
             @if (Model != null)
@@ -84,11 +84,7 @@
                         @*<td>
                                 @Html.DisplayFor(modelItem => item.ProductCategoryID)
                             </td>*@
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductCategoryID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ProductCategoryID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductCategoryID })
-                        </td>
+                       
                     </tr>
                 }
             }
