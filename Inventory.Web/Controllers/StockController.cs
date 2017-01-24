@@ -57,5 +57,13 @@ namespace Inventory.Web.Controllers
             return message;
         }
 
+        [HttpGet]
+        [Route("GetStockLevel")]
+        public int GetStockLevel(int ProductDetailID)
+        {
+            int Level = stockBs.GetStockLevelByProductDetailID(ProductDetailID);
+            return Level;
+        }
+
     }
 }

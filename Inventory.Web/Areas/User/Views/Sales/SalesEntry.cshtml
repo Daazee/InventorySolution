@@ -70,6 +70,7 @@
                 $('#Quantity').val('');
                 if ($('#ProductDetailID').val() != "") {
                     GetPrice();
+                    GetStockLevel();
                 }
             });
 
@@ -104,6 +105,31 @@
                 function successFunc(response) {
                     console.log(response);
                     $('#Rate').val(response);
+                }
+
+                function errorFunc(error) {
+                    console.log(error);
+                }
+            }
+
+
+            function GetStockLevel() {
+                var ProductDetailID = $('#ProductDetailID').val();
+                $.ajax({
+                    url: '../../api/Stock/GetStockLevel',
+                    cache: false,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    data: {
+                        ProductDetailID: ProductDetailID
+                    },
+                    success: successFunc,
+                    error: errorFunc
+                });
+
+                function successFunc(response) {
+                    console.log(response);
+                    $('#StockLevel').val(response);
                 }
 
                 function errorFunc(error) {
