@@ -37,8 +37,8 @@ namespace Inventory.DAL.Migrations
             UserObj.Address = "TBA";
             UserObj.Username = "admin";
             UserObj.Password = "admin";
-            UserObj.Status = "1";
-            UserObj.Role = "A";
+            UserObj.Status = 1;
+            UserObj.RoleID = 1;
             UserObj.Flag = "A";
             UserObj.Keydate = DateTime.Now;
             context.Users.AddOrUpdate(c => c.Username, UserObj);
@@ -60,6 +60,12 @@ namespace Inventory.DAL.Migrations
             CompanyDetailObj.ModifiedOn = DateTime.Now;
             CompanyDetailObj.ModifiedBy = "admin";
             context.CompanyDetails.AddOrUpdate(c => c.CompanyUsername, CompanyDetailObj);
+
+            context.Roles.AddOrUpdate(
+             p => p.RoleName,
+             new Role { RoleName = "Administrator", Status = 1, CreatedBy = "System", CreatedOn = DateTime.Today, ModifiedBy= "System", ModifiedOn = DateTime.Today},
+             new Role { RoleName = "User", Status = 1, CreatedBy = "System", CreatedOn = DateTime.Today, ModifiedBy = "System", ModifiedOn = DateTime.Today }
+             );
         }
     }
 }

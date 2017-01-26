@@ -100,15 +100,22 @@
                 var ProductCategoryName = $('#ProductCategoryName').val();
                 var ProductCategory = {};
                 ProductCategory.ProductCategoryName = ProductCategoryName;
-                $.ajax({
-                    url: '../../api/ProductCategory/AddProductCategory',
-                    cache: false,
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(ProductCategory),
-                    success: successFunc,
-                    error: errorFunc
-                });
+
+                if (ProductCategoryName == "") {
+                    alert("Please enter product category");
+                    $('#ProductCategoryName').focus();
+                }
+                else {
+                    $.ajax({
+                        url: '../../api/ProductCategory/AddProductCategory',
+                        cache: false,
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(ProductCategory),
+                        success: successFunc,
+                        error: errorFunc
+                    });
+                }
 
                 function successFunc(response) {
                     console.log(response);
@@ -148,6 +155,12 @@
                 //    //alert("Error occured");//To avoid alerting if no internet connection.
                 //    console.log(error);
                 //}
+            })
+
+            $('#Clear').click(function (e) {
+                e.preventDefault();
+                $('#ProductCategoryName').val('');
+                
             })
         })
 

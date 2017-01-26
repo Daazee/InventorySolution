@@ -150,14 +150,16 @@
                 var Amount = Number(Rate) * Number(Quantity);
                 var Colour = $("#Colour :selected").text();
 
-                if (ProductCategoryID == "Select") {
+                if (ProductCategoryID == "") {
                     alert("Please select a category")
                     $('#message').text("Please select a category");
+                    $("#ProductCategoryID").focus();
                 }
 
-                if (ProductDetailID == "Select") {
+               else if (ProductDetailID == "") {
                     alert("Please select a product")
                     $('#message').text("Please select a product");
+                    $('#ProductDetailID').focus();
                 }
                 else if(StockLevel ==""){
                     alert("Stock Level must not be empty")
@@ -167,9 +169,19 @@
                     alert("There is no product in stock")
                     $('#message').text("There is no product in stock");
                 }
-                else if (Quantity == "" || Quantity == 0) {
-                    alert("Quantity must not be empty or zero")
-                    $('#message').text("Quantity must not be empty or zero");
+                else if (Quantity == "") {
+                    alert("Quantity must not be empty")
+                    $('#message').text("Quantity must not be empty");
+                    $('#Quantity').focus();
+                }
+                else if (Quantity != "" && !$.isNumeric(Quantity)) {
+                    alert("Quantity must be numeric");
+                    $('#StockLevel').focus();
+                }
+                else if (Number(Quantity) < 0) {
+                    alert("Quantity must be greater than zero")
+                    $('#message').text("Quantity must be greater than zero");
+                    $('#Quantity').focus();
                 }
                 else if (Number(Quantity)  > Number(StockLevel) ){
                     alert("Quantity willing to purchase is greater than number of product in stock")
@@ -308,6 +320,7 @@
                 $('#Quantity').val("");
                 $('#Amount').val("");
                 $('#Rate').val("");
+                $('#StockLevel').val("");
             }
 
             $("#TableItem").on('click', '.rem', function () {

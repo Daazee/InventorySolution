@@ -81,7 +81,8 @@
                         Product Category
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ProductDetailID)
+                        @*@Html.DisplayNameFor(model => model.ProductDetailID)*@
+                        Product Name
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.StockLevel)
@@ -124,15 +125,37 @@
                 Stock.ProductDetailID = ProductDetailID;
                 Stock.StockLevel = StockLevel;
 
-                $.ajax({
-                    url: '../../api/Stock/StockEntry',
-                    cache: false,
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(Stock),
-                    success: successFunc,
-                    error: errorFunc
-                });
+                if (ProductCategoryID == "") {
+                    alert("Please select product category");
+                    $('#ProductCategoryID').focus();
+                }
+                else if (ProductDetailID == "") {
+                    alert("Please select product name");
+                    $('#ProductDetailID').focus();
+                }
+                else if (StockLevel == "") {
+                    alert("Please enter unit supplied");
+                    $('#StockLevel').focus();
+                }
+                else if (StockLevel != "" && !$.isNumeric(StockLevel)) {
+                    alert("Unit supplied must be numeric");
+                    $('#StockLevel').focus();
+                }
+                else if (Number(StockLevel) < 0) {
+                    alert("Unit supplied must be greater than zero")
+                    $('#StockLevel').focus();
+                }
+                else {
+                    $.ajax({
+                        url: '../../api/Stock/StockEntry',
+                        cache: false,
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(Stock),
+                        success: successFunc,
+                        error: errorFunc
+                    });
+                }
 
                 function successFunc(response) {
                     console.log(response);
@@ -176,6 +199,15 @@
             //        //alert("Error occured");//To avoid alerting if no internet connection.
             //        console.log(error);
             //    }
+
+            })
+
+
+            $('#Clear').click(function (e) {
+                e.preventDefault();
+                $('#ProductCategoryID').val('');
+                $('#ProductDetailID').val('');
+                $('#StockLevel').val('');
 
             })
         })

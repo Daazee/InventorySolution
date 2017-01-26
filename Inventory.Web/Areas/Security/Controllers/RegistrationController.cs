@@ -27,7 +27,7 @@ namespace Inventory.Web.Areas.Security.Controllers
 
         HttpPostedFileBase postedImage;
         private static byte[] byteImageData;
-        public ActionResult ListUsers(string status)
+        public ActionResult ListUsers(int status)
         {
             try
             {
@@ -38,15 +38,15 @@ namespace Inventory.Web.Areas.Security.Controllers
                 Session["ConfirmLogin"] = "You must login first";
                 return RedirectToAction("Login", new { Area = "Security", Controller = "Access" });
             }
-            if (status == null)
-            {
-                status = "P";
-            }
-            ViewBag.status = status;
-            if (status == "L")
-            {
-                return View(userBs.ListAll());
-            }
+            //if (status == null)
+            //{
+            //    status = "P";
+            //}
+            //ViewBag.status = status;
+            //if (status == "L")
+            //{
+            //    return View(userBs.ListAll());
+            //}
 
             return View(userBs.ListAllByStatus(status));
         }
@@ -92,8 +92,7 @@ namespace Inventory.Web.Areas.Security.Controllers
                         ViewData["Message"] = "Username already exist";
                         return View(UserObj);
                     }
-                    UserObj.Status = "P";
-                    //UserObj.UserId = "admin";
+                    UserObj.Status = 0;
                     UserObj.Keydate = DateTime.Now;
                     UserObj.Flag = "A";
                     userBs.Insert(UserObj);

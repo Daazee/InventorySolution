@@ -137,15 +137,15 @@ namespace Inventory.Web.Areas.User.Controllers
         [HttpGet]
         public ActionResult PrintReceipt()
         {
-            //try
-            //{
-            //    ViewBag.UserId = Session["Username"].ToString();
-            //}
-            //catch
-            //{
-            //    Session["ConfirmLogin"] = "You must login first";
-            //    return RedirectToAction("Login", new { Area = "Security", Controller = "Access" });
-            //}
+            try
+            {
+                ViewBag.UserId = Session["Username"].ToString();
+            }
+            catch
+            {
+                Session["ConfirmLogin"] = "You must login first";
+                return RedirectToAction("Login", new { Area = "Security", Controller = "Access" });
+            }
             if (Session["TransactionNo"] != null)
             {
                 salesObjMain.TransactionNo = Session["TransactionNo"].ToString();
