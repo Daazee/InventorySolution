@@ -49,6 +49,7 @@
     <Compile Include="PaymentDetail.cs" />
     <Compile Include="ProductDetailNonCyclical.cs" />
     <Compile Include="Receipt.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="Sales.cs" />
     <Compile Include="StockHistory.cs" />
     <Compile Include="Stock.cs" />

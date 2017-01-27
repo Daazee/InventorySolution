@@ -51,6 +51,7 @@
     <Compile Include="HashHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportBs.cs" />
+    <Compile Include="RoleBs.cs" />
     <Compile Include="SalesBs.cs" />
     <Compile Include="StockHistoryBs.cs" />
     <Compile Include="StockBs.cs" />
