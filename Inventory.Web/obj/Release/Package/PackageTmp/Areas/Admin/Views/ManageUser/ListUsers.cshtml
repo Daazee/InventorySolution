@@ -62,11 +62,23 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Username)
                             </td>
-                            <td>
+                            @if (item.Status == 1)
+                            {
+                                <td>
+                                    Active
+                                </td>
+                            }
+                            else if (item.Status == 0)
+                            {
+                                <td>
+                                    Inactive
+                                </td>
+                            }
+                            @*<td>
                                 @Html.DisplayFor(modelItem => item.Status)
-                            </td>
+                            </td>*@
                             <td>
-                                @Html.DisplayFor(modelItem => item.Role)
+                                @Html.DisplayFor(modelItem => item.Role.RoleName)
                             </td>
                         </tr>
                     }

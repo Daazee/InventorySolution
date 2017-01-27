@@ -74,7 +74,7 @@ namespace Inventory.Web.Areas.Admin.Controllers
             UserObj.Flag = "C";
             userBs.Update(UserObj);
             ViewData["Message"] = "Record updated successfully";
-            return View();
+            return View(UserObj);
         }
 
     }

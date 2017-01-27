@@ -80,14 +80,15 @@
                     <th>
                         @Html.DisplayNameFor(model => model.ProductName)
                     </th>
-                 
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </th>
                     <th>
                         Created On
                     </th>
-                    <th></th>
                 </tr>
             </thead>
 
@@ -104,15 +105,13 @@
                             @Html.DisplayFor(modelItem => item.ProductName)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.CreatedBy)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.KeyDate)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductDetailID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ProductDetailID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductDetailID })
                         </td>
                     </tr>
                 }
@@ -136,15 +135,33 @@
                 ProductDetail.ProductName = ProductName;
                 ProductDetail.Price = Price;
 
-                $.ajax({
-                    url: '../../api/ProductDetail/AddProduct',
-                    cache: false,
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(ProductDetail),
-                    success: successFunc,
-                    error: errorFunc
-                });
+                if (ProductCategoryID == "") {
+                    alert("Please select product category");
+                    $('#ProductCategoryID').focus();
+                }
+                else if (ProductName == "") {
+                    alert("Please enter product name");
+                    $('#ProductName').focus();
+                }
+                else if (Price == "") {
+                    alert("Please enter product price");
+                    $('#Price').focus();
+                }
+                else if (Price != "" && !$.isNumeric(Price)) {
+                    alert("Price must be numeric");
+                    $('#Price').focus();
+                }
+                else {
+                    $.ajax({
+                        url: '../../api/ProductDetail/AddProduct',
+                        cache: false,
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(ProductDetail),
+                        success: successFunc,
+                        error: errorFunc
+                    });
+                }
 
                 function successFunc(response) {
                     console.log(response);
@@ -156,6 +173,14 @@
                     //alert("Error occured");//To avoid alerting if no internet connection.
                     console.log(error);
                 }
+            })
+
+            $('#Clear').click(function (e) {
+                e.preventDefault();
+                $('#ProductCategoryID').val('');
+                $('#ProductName').val('');
+                $('#Price').val('');
+
             })
         })
 
