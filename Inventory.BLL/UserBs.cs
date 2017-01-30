@@ -62,5 +62,31 @@ namespace Inventory.BLL
           return NewUserDA.Login(username,password);
         }
 
+        public string LoginNew(string username, string password)
+        {
+            string result = "";
+            var search = NewUserDA.LoginNew(username);
+
+            if(search == null)
+            {
+                result = "Username does not exist";
+            }
+            else if(search.Password != password)
+            {
+                result = "Invalid password";
+            }
+            else if(search.Status == 0 && search.Flag=="A")//A fresh registration
+            {
+                result = "User has not been activated";
+            }
+            else if (search.Status == 0 && search.Flag == "C")//A fresh registration
+            {
+                result = "User has been deactivated";
+            }
+           
+            return result;
+           
         }
+
+    }
     }

@@ -17,7 +17,11 @@
                     <div class="form-group">
                         @Html.Label("Product Name", htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-8">
-                            @Html.DropDownList("ProductDetailID", (IEnumerable<SelectListItem>)ViewBag.ProudctName, "Select", new { @class = "form-control" })
+                            @*@Html.DropDownList("ProductDetailID", (IEnumerable<SelectListItem>)ViewBag.ProudctName, "Select", new { @class = "form-control" })*@
+                            @*@Html.DropDownList("ProductDetailID")*@
+                            <select id="ProductDetailID" name="ProductDetailID" class = "form-control" >
+                                <option value="">Select</option>
+                            </select>
                         </div>
                     </div>
 

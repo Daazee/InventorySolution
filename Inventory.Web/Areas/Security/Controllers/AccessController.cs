@@ -44,9 +44,20 @@ namespace Inventory.Web.Areas.Security.Controllers
                 Session["ConfirmLogin"] = "";
                 UserObj.Username = collection["Username"];
                 UserObj.Password = collection["Password"];
-                var result = userBs.Login(UserObj.Username, UserObj.Password);
-                //if (result == "Success")//Initial condition
-                if (result == true)
+                //var result = userBs.Login(UserObj.Username, UserObj.Password);
+                //if (result == true)
+                //{
+                //    Session["Username"] = collection["Username"];
+                //    Session["ConfirmLogin"] = "";
+                //    return RedirectToAction("Index", new { Controller = "Menu", Area = "Common" });
+                //}
+                //else
+                //{
+                //    ViewData["Message"] = result;
+                //    return View(UserObj);
+                //}
+                var result= userBs.LoginNew(UserObj.Username, UserObj.Password);
+                if (result == "")//No error message
                 {
                     Session["Username"] = collection["Username"];
                     Session["ConfirmLogin"] = "";

@@ -41,14 +41,12 @@
                 @*<li class="sidebar-brand">@Html.ActionLink("Dashboard", "Dashboard", new { Controller = "Settings", Area = "Admin" })</li>*@
 
                 <li>@Html.ActionLink("Dashboard", "Dashboard", new { Controller = "Settings", Area = "Admin" })</li>
-
-                <li>@Html.ActionLink("Users", "ListUsers", new { Controller = "ManageUser", Area = "Admin" })</li>
                 
                 <li>@Html.ActionLink("Product Category", "ProductCategoryEntry", new { Controller = "ProductCategory", Area = "Admin" })</li>
 
-                <li>@Html.ActionLink("Product Name", "ProductEntry", new { Controller = "ProductDetail", Area = "Admin" })</li>
+                <li>@Html.ActionLink("Product Entry", "ProductEntry", new { Controller = "ProductDetail", Area = "Admin" })</li>
 
-                <li>@Html.ActionLink("Sale Transaction", "SalesEntry", new { Controller = "Sales", Area = "User" })</li>
+                <li>@Html.ActionLink("Sales Transaction", "SalesEntry", new { Controller = "Sales", Area = "User" })</li>
 
                 <li>@Html.ActionLink("Stock Entry", "StockEntry", new { Controller = "Stock", Area = "Admin" })</li>
 
@@ -59,6 +57,8 @@
                 <li>@Html.ActionLink("Print Receipt", "PrintReceipt", new { Controller = "Sales", Area = "User" })</li>
 
                 <li>@Html.ActionLink("Print Sales Report", "SalesReport", new { Controller = "Report", Area = "User" })</li>
+
+                <li>@Html.ActionLink("Users", "ListUsers", new { Controller = "ManageUser", Area = "Admin" })</li>
 
                 @*<li>
                     <a href="#"><i class="glyphicon glyphicon-barcode icon-sidebar-margin-right"></i> Services</a>

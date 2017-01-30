@@ -90,5 +90,13 @@ namespace Inventory.DAL
             }
             return result;
         }
+
+        public User LoginNew(string username)
+        {
+            
+            var search = context.Users.Where(c => c.Username == username).FirstOrDefault();
+            return search;
+           
+        }
     }
 }
