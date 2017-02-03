@@ -72,8 +72,8 @@
         $(document).ready(function () {
 
             $('#ProductCategoryID').change(function () {
+                $('#ProductDetailID').empty();
                 if($('#ProductCategoryID').val() != ""){
-                    $('#ProductDetailID').empty();
                     $('#ProductDetailID')
                     .append('<option value="">' + "Select" + '</option>')
                      GetProductByCategory($('#ProductCategoryID').val());

@@ -45,6 +45,11 @@ namespace Inventory.BLL
             NewProductDetailDA.Update(ProductDetailExist);
         }
 
+        public void Delete(int ProductDetailID)
+        {
+            NewProductDetailDA.Delete(ProductDetailID);
+        }
+
         public double GetPrice(int ProductDetailID)
         {
             double Price = NewProductDetailDA.GetPrice(ProductDetailID);

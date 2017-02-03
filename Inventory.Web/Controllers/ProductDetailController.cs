@@ -73,5 +73,13 @@ namespace Inventory.Web.Controllers
         {
             return Ok(productDetailBs.GetProductByName(name));
         }
+
+        //[HttpDelete]
+        [HttpGet]
+        [Route("DeleteProduct")]
+        public void DeleteProduct(int ProductDetailID)
+        {
+           productDetailBs.Delete(ProductDetailID);
+        }
     }
 }
