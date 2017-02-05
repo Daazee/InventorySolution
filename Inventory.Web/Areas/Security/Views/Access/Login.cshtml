@@ -1,4 +1,4 @@
-﻿<link href="~/Content/loginstyle.css" rel="stylesheet" />
+﻿<link href="~/Content/loginstyle.css?v=1.0" rel="stylesheet" />
 @model Inventory.Model.User
 @{
     ViewBag.Title = "Login";
@@ -21,7 +21,7 @@
             }
             @if (ViewData["Message"] != null && ViewData["Message"].ToString() != "")
                 {
-                <div class="bg-danger alert alert-dismissable" style="margin-top:1px;">
+                <div class="alert alert-dismissable alert-danger" style="margin-top:3px;">
                     @ViewData["Message"]
                 </div>
             }

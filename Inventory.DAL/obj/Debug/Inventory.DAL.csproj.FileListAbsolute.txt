@@ -22,3 +22,15 @@ E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.DAL\bi
 E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.DAL\obj\Debug\Inventory.DAL.csprojResolveAssemblyReference.cache
 E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.DAL\obj\Debug\Inventory.DAL.dll
 E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.DAL\obj\Debug\Inventory.DAL.pdb
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\bin\Debug\Inventory.DAL.dll.config
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\bin\Debug\Inventory.DAL.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\bin\Debug\Inventory.DAL.pdb
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\bin\Debug\EntityFramework.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\bin\Debug\Inventory.Model.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\bin\Debug\Inventory.Model.pdb
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\bin\Debug\EntityFramework.xml
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\obj\Debug\Inventory.DAL.csprojResolveAssemblyReference.cache
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\obj\Debug\Inventory.DAL.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.DAL\obj\Debug\Inventory.DAL.pdb

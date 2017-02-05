@@ -52,6 +52,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PaymentDetailDA.cs" />
     <Compile Include="ReportDA.cs" />
+    <Compile Include="RoleDA.cs" />
     <Compile Include="SalesDA.cs" />
     <Compile Include="StockHistoryDA.cs" />
     <Compile Include="StockDA.cs" />

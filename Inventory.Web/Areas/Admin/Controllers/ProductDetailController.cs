@@ -35,5 +35,23 @@ namespace Inventory.Web.Areas.Admin.Controllers
             ViewBag.ProudctCategory = new SelectList(productCategoryBs.ListAll(), "ProductCategoryID", "ProductCategoryName");
             return View();
         }
+
+        public JsonResult GetProductsByCategoryID (int ProductCategoryID)
+        {
+            var result = productDetailBs.GetByProductCategoryID(ProductCategoryID);
+            if (result == null)
+            {
+                return null;
+            }
+            var ProductDetailResult = result.Select(x => new ProductDetailNonCyclical
+            {
+                ProductCategoryID = x.ProductCategoryID,
+                ProductDetailID = x.ProductDetailID,
+                ProductName = x.ProductName,
+                Price = x.Price
+
+            });
+            return Json(ProductDetailResult, JsonRequestBehavior.AllowGet);
+        }
     }
 }

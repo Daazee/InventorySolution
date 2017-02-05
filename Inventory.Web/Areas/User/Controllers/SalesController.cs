@@ -37,7 +37,7 @@ namespace Inventory.Web.Areas.User.Controllers
         public ActionResult SalesEntry()
         {
             ViewBag.ProudctCategory = new SelectList(productCategoryBs.ListAll(), "ProductCategoryID", "ProductCategoryName");
-            ViewBag.ProudctName = new SelectList(productDetailBs.ListAll(), "ProductDetailID", "ProductName");
+            //ViewBag.ProudctName = new SelectList(productDetailBs.ListAll(), "ProductDetailID", "ProductName");
             return View();
         }
 
@@ -54,7 +54,7 @@ namespace Inventory.Web.Areas.User.Controllers
             //    return RedirectToAction("Login", new { Area = "Security", Controller = "Access" });
             //}
             ViewBag.ProudctCategory = new SelectList(productCategoryBs.ListAll(), "ProductCategoryID", "ProductCategoryName");
-            ViewBag.ProudctName = new SelectList(productDetailBs.ListAll(), "ProductDetailID", "ProductName");
+           // ViewBag.ProudctName = new SelectList(productDetailBs.ListAll(), "ProductDetailID", "ProductName");
 
             return PartialView();
         }
@@ -64,7 +64,7 @@ namespace Inventory.Web.Areas.User.Controllers
         public ActionResult _AddItem(FormCollection collection)
         {
             ViewBag.ProudctCategory = new SelectList(productCategoryBs.ListAll(), "ProductCategoryID", "ProductCategoryName");
-            ViewBag.ProudctName = new SelectList(productDetailBs.ListAll(), "ProductDetailID", "ProductName");
+            //ViewBag.ProudctName = new SelectList(productDetailBs.ListAll(), "ProductDetailID", "ProductName");
 
             return PartialView();
         }
@@ -79,41 +79,46 @@ namespace Inventory.Web.Areas.User.Controllers
             //{
             //    ViewBag.UserId = "";
             //}
-
-            if (SalesObj.HeaderDetail == "H")
+            try
             {
-                PaymentDetailObj.PaymentNo =  salesObjMain.TransactionNo = GenerateTransNo();
-                PaymentDetailObj.SalesAmount =  Convert.ToDouble(SalesObj.TotalProductCostAmount);
-                PaymentDetailObj.CreatedBy = "admin"; //ViewBag.UserId;
-                PaymentDetailObj.Flag = "A";
-                PaymentDetailObj.KeyDate = DateTime.Today;
-                paymentDetailBs.Insert(PaymentDetailObj);
+                if (SalesObj.HeaderDetail == "H")
+                {
+                    PaymentDetailObj.PaymentNo = salesObjMain.TransactionNo = GenerateTransNo();
+                    PaymentDetailObj.SalesAmount = Convert.ToDouble(SalesObj.TotalProductCostAmount);
+                    PaymentDetailObj.CreatedBy = "admin"; //ViewBag.UserId;
+                    PaymentDetailObj.Flag = "A";
+                    PaymentDetailObj.KeyDate = DateTime.Today;
+                    paymentDetailBs.Insert(PaymentDetailObj);
+                }
+                else
+                {
+                    salesObjMain.TransactionNo = Session["TransactionNo"].ToString(); ;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                salesObjMain.TransactionNo = Session["TransactionNo"].ToString(); ;
+                ViewData["Message"] = ex.Message;
             }
+                StockObj.ProductCategoryID = salesObjMain.ProductCategoryID = SalesObj.ProductCategoryID;
+                StockObj.ProductDetailID = salesObjMain.ProductDetailID = SalesObj.ProductDetailID;
+                salesObjMain.Rate = Convert.ToDouble(SalesObj.Rate);
+                salesObjMain.Quantity = SalesObj.Quantity;
+                salesObjMain.TotalAmount = Convert.ToDouble(SalesObj.TotalAmount);
+                salesObjMain.AmountPaid = Convert.ToDouble(SalesObj.AmountPaid);
+                salesObjMain.TotalProductCostAmount = Convert.ToDouble(SalesObj.TotalProductCostAmount);
+                Session["TransactionNo"] = salesObjMain.TransactionNo;
+                salesObjMain.HeaderDetail = SalesObj.HeaderDetail;
+                salesObjMain.CreatedBy = "admin";
+                salesObjMain.CreatedOn = DateTime.Today;
+                StockObj.ModifiedBy = salesObjMain.ModifiedBy = "admin";
+                StockObj.ModifiedOn = salesObjMain.ModifiedOn = DateTime.Today;
+                salesBs.Insert(salesObjMain);
 
-            StockObj.ProductCategoryID = salesObjMain.ProductCategoryID = SalesObj.ProductCategoryID;
-            StockObj.ProductDetailID = salesObjMain.ProductDetailID = SalesObj.ProductDetailID;
-            salesObjMain.Rate = Convert.ToDouble(SalesObj.Rate);
-            salesObjMain.Quantity = SalesObj.Quantity;
-            salesObjMain.TotalAmount = Convert.ToDouble(SalesObj.TotalAmount);
-            salesObjMain.AmountPaid = Convert.ToDouble(SalesObj.AmountPaid);
-            salesObjMain.TotalProductCostAmount = Convert.ToDouble(SalesObj.TotalProductCostAmount);
-            Session["TransactionNo"] = salesObjMain.TransactionNo;
-            salesObjMain.HeaderDetail = SalesObj.HeaderDetail;
-            salesObjMain.CreatedBy = "admin";
-            salesObjMain.CreatedOn = DateTime.Today;
-            StockObj.ModifiedBy = salesObjMain.ModifiedBy = "admin";
-            StockObj.ModifiedOn = salesObjMain.ModifiedOn = DateTime.Today;
-            salesBs.Insert(salesObjMain);
+                int CurrentStockLevel = stockBs.GetStockLevelByProductDetailID(StockObj.ProductDetailID);
+                StockObj.StockLevel = CurrentStockLevel - SalesObj.Quantity;
+                stockBs.Update(StockObj);
 
-            int CurrentStockLevel = stockBs.GetStockLevelByProductDetailID(StockObj.ProductDetailID);
-            StockObj.StockLevel = CurrentStockLevel - SalesObj.Quantity;
-            stockBs.Update(StockObj);
-
-            return Json(new { transNo = salesObjMain.TransactionNo}, JsonRequestBehavior.AllowGet);
+                return Json(new { transNo = salesObjMain.TransactionNo }, JsonRequestBehavior.AllowGet);
         }
 
         public string GenerateTransNo()
@@ -137,15 +142,15 @@ namespace Inventory.Web.Areas.User.Controllers
         [HttpGet]
         public ActionResult PrintReceipt()
         {
-            //try
-            //{
-            //    ViewBag.UserId = Session["Username"].ToString();
-            //}
-            //catch
-            //{
-            //    Session["ConfirmLogin"] = "You must login first";
-            //    return RedirectToAction("Login", new { Area = "Security", Controller = "Access" });
-            //}
+            try
+            {
+                ViewBag.UserId = Session["Username"].ToString();
+            }
+            catch
+            {
+                Session["ConfirmLogin"] = "You must login first";
+                return RedirectToAction("Login", new { Area = "Security", Controller = "Access" });
+            }
             if (Session["TransactionNo"] != null)
             {
                 salesObjMain.TransactionNo = Session["TransactionNo"].ToString();

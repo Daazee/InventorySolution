@@ -17,9 +17,21 @@
                     <div class="form-group">
                         @Html.Label("Product Name", htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-8">
-                            @Html.DropDownList("ProductDetailID", (IEnumerable<SelectListItem>)ViewBag.ProudctName, "Select", new { @class = "form-control" })
+                            @*@Html.DropDownList("ProductDetailID", (IEnumerable<SelectListItem>)ViewBag.ProudctName, "Select", new { @class = "form-control" })*@
+                            @*@Html.DropDownList("ProductDetailID")*@
+                            <select id="ProductDetailID" name="ProductDetailID" class = "form-control" >
+                                <option value="">Select</option>
+                            </select>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                       <label class="control-label col-md-4">Current Stock Level</label>
+                        <div class="col-md-8">
+                            <input type="text" id="StockLevel" name="StockLevel" value="" class="form-control" disabled="disabled" />
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-8">
@@ -85,7 +97,7 @@
 
                         </table>
                         <table>
-                            <tr><td colspan="4" style="width:230px !important"><label id="totalLabel"></label></td><td><label id="totalAmt" style="width:30px !important"></label></td></tr>
+                            <tr><td colspan="6" style="width:290px !important"><label id="totalLabel"></label></td><td><label id="totalAmt" style="width:30px !important"></label></td></tr>
                         </table>
                     </div>
                 </div>

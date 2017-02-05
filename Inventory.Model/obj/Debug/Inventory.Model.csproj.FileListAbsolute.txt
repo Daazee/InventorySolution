@@ -7,3 +7,7 @@ E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.Model\
 E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.Model\bin\Debug\Inventory.Model.pdb
 E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.Model\obj\Debug\Inventory.Model.dll
 E:\CSharpMVCProject\MVCApps\InventorySolution\InventorySolution\Inventory.Model\obj\Debug\Inventory.Model.pdb
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.Model\bin\Debug\Inventory.Model.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.Model\bin\Debug\Inventory.Model.pdb
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.Model\obj\Debug\Inventory.Model.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.Model\obj\Debug\Inventory.Model.pdb

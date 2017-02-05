@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Inventory.Model.ProductDetail>
 
 @{
-    ViewBag.Title = "ProductEntry";
+    ViewBag.Title = "Product Entry";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
 
@@ -32,14 +32,21 @@
                     <div class="form-group">
                         @Html.Label("Product Category", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownList("ProductCategoryCode", (IEnumerable<SelectListItem>)ViewBag.ProudctCategory, "Select", new { @class = "form-control" })
+                            @Html.DropDownList("ProductCategoryID", (IEnumerable<SelectListItem>)ViewBag.ProudctCategory, "Select", new { @class = "form-control" })
                         </div>
                     </div>
 
                     <div class="form-group">
                         @Html.Label("Product Name", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.TextBox("ProductDetailDescription", "", new { @class = "form-control" })
+                            @Html.TextBox("ProductName", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Price", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBox("Price", "", new { @class = "form-control" })
                         </div>
                     </div>
 
@@ -67,21 +74,21 @@
             <thead style="color:blueviolet;">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.ProductCategoryCode)
+                        @*@Html.DisplayNameFor(model => model.ProductCategoryID)*@
+                        Product Category
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ProductDetailDescription)
+                        @Html.DisplayNameFor(model => model.ProductName)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Flag)
+                        @Html.DisplayNameFor(model => model.Price)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.KeyDate)
+                        Created On
                     </th>
-                    <th></th>
                 </tr>
             </thead>
 
@@ -91,24 +98,20 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ProductCategoryCode)
+                            @*@Html.DisplayFor(modelItem => item.ProductCategoryID)*@
+                            @Html.DisplayFor(modelItem => item.ProductCategory.ProductCategoryName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ProductDetailDescription)
+                            @Html.DisplayFor(modelItem => item.ProductName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Flag)
+                            @Html.DisplayFor(modelItem => item.Price)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CreatedBy)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.KeyDate)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductDetailID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ProductDetailID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductDetailID })
                         </td>
                     </tr>
                 }
@@ -117,3 +120,69 @@
         </table>
     </div>
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Save').click(function (e) {
+                e.preventDefault();
+                var ProductDetail = {};
+
+                var ProductCategoryID = $('#ProductCategoryID').val();
+                var ProductName = $('#ProductName').val();
+                var Price = $('#Price').val();
+
+                ProductDetail.ProductCategoryID = ProductCategoryID;
+                ProductDetail.ProductName = ProductName;
+                ProductDetail.Price = Price;
+
+                if (ProductCategoryID == "") {
+                    alert("Please select product category");
+                    $('#ProductCategoryID').focus();
+                }
+                else if (ProductName == "") {
+                    alert("Please enter product name");
+                    $('#ProductName').focus();
+                }
+                else if (Price == "") {
+                    alert("Please enter product price");
+                    $('#Price').focus();
+                }
+                else if (Price != "" && !$.isNumeric(Price)) {
+                    alert("Price must be numeric");
+                    $('#Price').focus();
+                }
+                else {
+                    $.ajax({
+                        url: '../../api/ProductDetail/AddProduct',
+                        cache: false,
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(ProductDetail),
+                        success: successFunc,
+                        error: errorFunc
+                    });
+                }
+
+                function successFunc(response) {
+                    console.log(response);
+                    alert(response);
+                    location.reload();
+                }
+
+                function errorFunc(error) {
+                    //alert("Error occured");//To avoid alerting if no internet connection.
+                    console.log(error);
+                }
+            })
+
+            $('#Clear').click(function (e) {
+                e.preventDefault();
+                $('#ProductCategoryID').val('');
+                $('#ProductName').val('');
+                $('#Price').val('');
+
+            })
+        })
+
+    </script>
+}

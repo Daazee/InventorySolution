@@ -18,12 +18,12 @@ namespace Inventory.BLL
         }
 
 
-        public IEnumerable<User> ListAllByStatus(string status)
+        public IEnumerable<User> ListAllByStatus(int status)
         {
             return NewUserDA.ListAllByStatus(status);
         }
 
-        public string UpdateStatus(string username, string status)
+        public string UpdateStatus(string username, int status)
         {
             return NewUserDA.UpdateStatus(username,status);
         }
@@ -48,9 +48,11 @@ namespace Inventory.BLL
 
         public void Update(User UserBsObj)
         {
-            var UserExist = NewUserDA.GetByUsername(UserBsObj.Username);
+            var UserExist = NewUserDA.GetById(UserBsObj.UserID);
+            if( UserBsObj.Password !="")
             UserExist.Password = UserBsObj.Password;
-            //UserExist.Amount = UserBsObj.Amount;
+            UserExist.Status = UserBsObj.Status;
+            UserExist.RoleID = UserBsObj.RoleID;
             UserExist.Flag = UserBsObj.Flag;
             NewUserDA.Update(UserExist);
         }
@@ -60,5 +62,31 @@ namespace Inventory.BLL
           return NewUserDA.Login(username,password);
         }
 
+        public string LoginNew(string username, string password)
+        {
+            string result = "";
+            var search = NewUserDA.LoginNew(username);
+
+            if(search == null)
+            {
+                result = "Username does not exist";
+            }
+            else if(search.Password != password)
+            {
+                result = "Invalid password";
+            }
+            else if(search.Status == 0 && search.Flag=="A")//A fresh registration
+            {
+                result = "User has not been activated";
+            }
+            else if (search.Status == 0 && search.Flag == "C")//A fresh registration
+            {
+                result = "User has been deactivated";
+            }
+           
+            return result;
+           
         }
+
+    }
     }

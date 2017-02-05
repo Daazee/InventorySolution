@@ -53,8 +53,16 @@ namespace Inventory.Web.Controllers
             }
             
             stockHistoryBs.Insert(StockHistoryObj);
-            message = "Product added successfully";
+            message = "Stock updated successfully";
             return message;
+        }
+
+        [HttpGet]
+        [Route("GetStockLevel")]
+        public int GetStockLevel(int ProductDetailID)
+        {
+            int Level = stockBs.GetStockLevelByProductDetailID(ProductDetailID);
+            return Level;
         }
 
     }

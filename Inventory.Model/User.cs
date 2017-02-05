@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Inventory.Model
 {
@@ -27,10 +28,13 @@ namespace Inventory.Model
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
-        public string Status { get; set; }
+        public int Status { get; set; }
 
-        public string Role { get; set; }
+        [ForeignKey("Role")]
+        public int RoleID { get; set; }
         public string Flag { get; set; }
         public DateTime Keydate { get; set; }
+
+        public virtual Role Role { get; set; }
     }
 }

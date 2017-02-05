@@ -9,3 +9,14 @@ E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.BLL\bin\Release\EntityFr
 E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.BLL\obj\Release\Inventory.BLL.csprojResolveAssemblyReference.cache
 E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.BLL\obj\Release\Inventory.BLL.dll
 E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.BLL\obj\Release\Inventory.BLL.pdb
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\bin\Release\Inventory.BLL.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\bin\Release\Inventory.BLL.pdb
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\bin\Release\Inventory.DAL.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\bin\Release\Inventory.Model.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\bin\Release\EntityFramework.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\bin\Release\Inventory.DAL.pdb
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\bin\Release\Inventory.Model.pdb
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\bin\Release\EntityFramework.xml
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\obj\Release\Inventory.BLL.csprojResolveAssemblyReference.cache
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\obj\Release\Inventory.BLL.dll
+C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.BLL\obj\Release\Inventory.BLL.pdb

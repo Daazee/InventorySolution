@@ -20,17 +20,17 @@ namespace Inventory.DAL
 
         public IEnumerable<User> ListAll()
         {
-            return context.Users.ToList(); 
+            return context.Users.Include("Role").ToList(); 
 
         }
 
 
-        public IEnumerable<User> ListAllByStatus(string status)
+        public IEnumerable<User> ListAllByStatus(int status)
         {
-            return context.Users.Where(c=>c.Status==status).ToList();
+            return context.Users.Where(c=>c.Status==status).Include("Role").ToList();
         }
 
-        public string UpdateStatus(string username, string status)
+        public string UpdateStatus(string username, int status)
         {
             var search = context.Users.Where(c => c.Username == username).FirstOrDefault();
             search.Status = status;
@@ -40,7 +40,7 @@ namespace Inventory.DAL
         }
         public User GetById(int id)
         {
-            return context.Users.Where(c => c.UserID == id).FirstOrDefault();
+            return context.Users.Where(c => c.UserID == id).Include("Role").FirstOrDefault();
         }
 
         public User GetByUsername(string username)
@@ -89,6 +89,14 @@ namespace Inventory.DAL
                 result = true;
             }
             return result;
+        }
+
+        public User LoginNew(string username)
+        {
+            
+            var search = context.Users.Where(c => c.Username == username).FirstOrDefault();
+            return search;
+           
         }
     }
 }

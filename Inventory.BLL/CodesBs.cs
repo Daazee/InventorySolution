@@ -49,5 +49,10 @@ namespace Inventory.BLL
             CodesExist.Flag = CodesBsObj.Flag;
             NewCodesDA.Update(CodesExist);
         }
+
+        public void test()
+        {
+
+        }
     }
 }

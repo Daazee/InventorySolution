@@ -30,5 +30,11 @@ namespace Inventory.Web.Areas.Admin.Controllers
         {
             return View(stockHistoryBs.ListAll());
         }
+
+        [HttpGet]
+        public ActionResult StockLevel()
+        {
+            return View(stockBs.ListAll());
+        }
     }
 }

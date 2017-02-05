@@ -34,7 +34,9 @@ namespace Inventory.DAL
 
         public DbSet<User> Users { get; set; }
         public DbSet<EmailSetting> EmailSettings { get; set; }
-        
+
+        public DbSet<Role> Roles { get; set; }
+
 
     }
 }
