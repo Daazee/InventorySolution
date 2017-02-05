@@ -1,9 +1,0 @@
-E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Model\bin\Release\Inventory.Model.dll
-E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Model\bin\Release\Inventory.Model.pdb
-E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Model\obj\Release\Inventory.Model.dll
-E:\CSharpMVCProject\MVCApps\InventorySolution\Inventory.Model\obj\Release\Inventory.Model.pdb
-C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.Model\bin\Release\Inventory.Model.dll
-C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.Model\bin\Release\Inventory.Model.pdb
-C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.Model\obj\Release\Inventory.Model.csprojResolveAssemblyReference.cache
-C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.Model\obj\Release\Inventory.Model.dll
-C:\EminentAdebayo\WebProject\InventorySolution\InventorySolution\Inventory.Model\obj\Release\Inventory.Model.pdb

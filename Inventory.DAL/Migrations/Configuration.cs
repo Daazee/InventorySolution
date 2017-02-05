@@ -66,6 +66,8 @@ namespace Inventory.DAL.Migrations
              new Role { RoleName = "Administrator", Status = 1, CreatedBy = "System", CreatedOn = DateTime.Today, ModifiedBy= "System", ModifiedOn = DateTime.Today},
              new Role { RoleName = "User", Status = 1, CreatedBy = "System", CreatedOn = DateTime.Today, ModifiedBy = "System", ModifiedOn = DateTime.Today }
              );
+
+            //
         }
     }
 }
