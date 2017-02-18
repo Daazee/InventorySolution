@@ -17,4 +17,4 @@ artifacts/
 *.apk
 _ReSharper.*
 /.vs
-/Web.config
+Inventory.Web/Web.config
