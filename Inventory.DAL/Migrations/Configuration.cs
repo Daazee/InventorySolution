@@ -44,7 +44,7 @@ namespace Inventory.DAL.Migrations
             context.Users.AddOrUpdate(c => c.Username, UserObj);
 
 
-            CompanyDetail CompanyDetailObj = new CompanyDetail();
+            /*CompanyDetail CompanyDetailObj = new CompanyDetail();
             CompanyDetailObj.CompanyCode = "Test";
             CompanyDetailObj.CompanyName = "Test Inventory";
             CompanyDetailObj.CompanyShortName = "Test Inventory";
@@ -59,7 +59,7 @@ namespace Inventory.DAL.Migrations
             CompanyDetailObj.CreatedBy = "admin";
             CompanyDetailObj.ModifiedOn = DateTime.Now;
             CompanyDetailObj.ModifiedBy = "admin";
-            context.CompanyDetails.AddOrUpdate(c => c.CompanyUsername, CompanyDetailObj);
+            context.CompanyDetails.AddOrUpdate(c => c.CompanyUsername, CompanyDetailObj);*/
 
             context.Roles.AddOrUpdate(
              p => p.RoleName,

@@ -207,6 +207,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageCompanyController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductDetailController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
@@ -274,6 +275,9 @@
     <Content Include="Areas\Admin\Views\Stock\StockLevel.cshtml" />
     <Content Include="Areas\Admin\Views\ManageUser\ListUsers.cshtml" />
     <Content Include="Areas\Admin\Views\ManageUser\UpdateUser.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCompany\UploadCompanyLogo.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCompany\CompanyRegistration.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCompany\CompanyRegUpdate.cshtml" />
     <None Include="Properties\PublishProfiles\InventoryApp.pubxml" />
     <Content Include="ReportDataset\InventoryDs.xsc">
       <DependentUpon>InventoryDs.xsd</DependentUpon>

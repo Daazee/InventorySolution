@@ -59,6 +59,8 @@ namespace Inventory.Web.Areas.Security.Controllers
                 var result= userBs.LoginNew(UserObj.Username, UserObj.Password);
                 if (result == "")//No error message
                 {
+                    var CompanyName = companyDetailBs.DisplayCompanyName();
+                    Session["CompanyName"] = CompanyName;
                     Session["Username"] = collection["Username"];
                     Session["ConfirmLogin"] = "";
                     return RedirectToAction("Index", new { Controller = "Menu", Area = "Common" });
