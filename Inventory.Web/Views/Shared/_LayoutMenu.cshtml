@@ -8,8 +8,8 @@
     @Styles.Render("~/Content/css")
     <link href="~/Content/simple-sidebar.css" rel="stylesheet" />
     <style>
-        .icon-sidebar-margin-right{
-            margin-right:10px;
+        .icon-sidebar-margin-right {
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -25,9 +25,9 @@
                 @{
                     CompanyLogoBs companyLogoBs = new CompanyLogoBs();
                     var CompanyLogoResult = companyLogoBs.GetCompanyLogo();
-                    if (CompanyLogoResult.Logo != null)
+                    if (CompanyLogoResult != null && CompanyLogoResult.Logo != null)
                     {
-                        <img src="data:image;base64,@System.Convert.ToBase64String(CompanyLogoResult.Logo)" width="50" height="50" style="float:left; margin-right:10px;" />
+                            <img src="data:image;base64,@System.Convert.ToBase64String(CompanyLogoResult.Logo)" width="50" height="50" style="float:left; margin-right:10px;" />
                     }
                     else
                     {
@@ -36,17 +36,18 @@
                 }
                 @if (Session["CompanyName"] != null)
                 {
-                    @Html.ActionLink(Session["CompanyName"].ToString(), "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink(Session["CompanyName"].ToString(), "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style="text-transform: capitalize;" })
                 }
-                else {
-                @Html.ActionLink("Inventory", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                else
+                {
+                    @Html.ActionLink("Inventory", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["Username"] != null)
                     {
-                    <li>@Html.ActionLink("Welcome " + @Session["Username"].ToString(), "", new { controller = "", area = "" })</li>
+                        <li>@Html.ActionLink("Welcome " + @Session["Username"].ToString(), "", new { controller = "", area = "" })</li>
                     }
                     <li>@Html.ActionLink("Logout", "Logout", new { Controller = "Access", Area = "Security" })</li>
                 </ul>
@@ -60,7 +61,7 @@
                 @*<li class="sidebar-brand">@Html.ActionLink("Dashboard", "Dashboard", new { Controller = "Settings", Area = "Admin" })</li>*@
 
                 <li>@Html.ActionLink("Dashboard", "Dashboard", new { Controller = "Settings", Area = "Admin" })</li>
-                
+
                 <li>@Html.ActionLink("Product Category", "ProductCategoryEntry", new { Controller = "ProductCategory", Area = "Admin" })</li>
 
                 <li>@Html.ActionLink("Product Entry", "ProductEntry", new { Controller = "ProductDetail", Area = "Admin" })</li>
@@ -83,8 +84,8 @@
 
                 <li>@Html.ActionLink("Upload Company Logo", "UploadCompanyLogo", new { Controller = "ManageCompany", Area = "Admin" })</li>
                 @*<li>
-                    <a href="#"><i class="glyphicon glyphicon-barcode icon-sidebar-margin-right"></i> Services</a>
-                </li>*@
+                        <a href="#"><i class="glyphicon glyphicon-barcode icon-sidebar-margin-right"></i> Services</a>
+                    </li>*@
                 <li>@Html.ActionLink("Logout", "Logout", new { Controller = "Access", Area = "Security" })</li>
             </ul>
         </div>

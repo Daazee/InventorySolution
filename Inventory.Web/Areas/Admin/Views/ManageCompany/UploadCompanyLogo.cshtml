@@ -17,7 +17,7 @@
             <label for="image" class="control-label col-md-2">Logo</label>
             <div>
                 <input type="file" name="image" id="image" style="max-width:250px;" class="col-md-3" />
-                @if (Model.Logo != null)
+                @if (Model !=null && Model.Logo != null)
                 {
                     <img src="data:image;base64,@System.Convert.ToBase64String(Model.Logo)" width="150" height="150" style="float:left;" class="col-md-3" />
                 }
