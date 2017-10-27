@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Inventory.Model;
 using Inventory.BLL;
+using System.Threading;
 
 namespace Inventory.Web.Controllers
 {
@@ -63,6 +64,7 @@ namespace Inventory.Web.Controllers
         [Route("GetPrice")]
         public double GetPrice(int ProductDetailID)
         {
+        Thread.Sleep(1000);
             double Price = productDetailBs.GetPrice(ProductDetailID);
             return Price;
         }

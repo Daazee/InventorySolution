@@ -66,12 +66,17 @@
         <!-- Main form closure-->
     </div>
 }
+<div id="divProcessing">
+    <p>Processing, please wait . . . <img src="../../Content/busy.gif"></p>
+</div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-
+        
+        $("#divProcessing").hide();
             $('#ProductCategoryID').change(function () {
+      
                 $('#ProductDetailID').empty();
                 if($('#ProductCategoryID').val() != ""){
                     $('#ProductDetailID')
@@ -79,16 +84,21 @@
                      GetProductByCategory($('#ProductCategoryID').val());
                 
                 }
-               
+        
             });
 
             $('#ProductDetailID').change(function () {
+            
+             // Show the "busy" Gif:
+            $("#divProcessing").show();
                 $('#Rate').val("0.00");
                 $('#Quantity').val('');
                 if ($('#ProductDetailID').val() != "") {
                     GetPrice();
                     GetStockLevel();
                 }
+                         // Hide the "busy" gif:
+            $("#divProcessing").hide();
             });
 
             //$('#Quantity').blur(function () {
