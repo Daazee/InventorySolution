@@ -82,6 +82,7 @@ namespace Inventory.Web.Areas.Security.Controllers
                 UserObj.Username = collection["Username"];
                 UserObj.Password = collection["Password"];
 
+                UserObj.RoleID = 2;//Ordinary user role
 
                 if (collection["Password"] == collection["ConfirmPassword"])
                 {
