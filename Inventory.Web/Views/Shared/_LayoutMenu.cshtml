@@ -36,7 +36,13 @@
                 }
                 @if (Session["CompanyName"] != null)
                 {
+                    if(Session["CompanyName"].ToString() != "") { 
                     @Html.ActionLink(Session["CompanyName"].ToString(), "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style="text-transform: capitalize;" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Inventory", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    }
                 }
                 else
                 {
